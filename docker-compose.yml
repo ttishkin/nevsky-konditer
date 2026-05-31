@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      # - SMTP_HOST=...   # для реальной отправки писем
+    volumes:
+      - ./server/data:/app/server/data   # сохранять базу между перезапусками

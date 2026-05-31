@@ -1,0 +1,48 @@
+/* styles/06-screens-extra.css — Экранные стили (часть 2): сторис, профиль и пр. */
+  .vprops{display:flex;gap:14px;margin-top:26px}
+  .vp{font-size:11px;font-weight:600;color:rgba(255,255,255,.92);text-align:center;width:86px;line-height:1.25}
+  .vp .vpi{font-size:26px;margin-bottom:6px}
+  .odots{display:flex;gap:8px;margin-bottom:16px}
+  .odots span{width:22px;height:6px;border-radius:3px;background:rgba(255,255,255,.16)}
+  .odots span.on{background:var(--acc)}
+  .goalcards{display:flex;gap:8px}
+  .goalc{flex:1;border:1px solid var(--sep);background:var(--card);border-radius:14px;padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font-family:inherit;color:var(--label);font-size:13px;font-weight:600}
+  .goalc .gci{font-size:24px}
+  .goalc.on{border-color:var(--acc);background:rgba(199,249,75,.10)}
+  .hello{font-size:15px;color:var(--label2);padding:8px 20px 0;font-weight:500}
+
+  .otl{display:flex;align-items:center;margin:12px 0 4px}
+  .ostep{display:flex;flex-direction:column;align-items:center;gap:5px;flex:none;width:62px}
+  .ostep .odot{width:14px;height:14px;border-radius:7px;background:var(--card2);border:2px solid var(--sep)}
+  .ostep.on .odot{background:var(--acc);border-color:var(--acc)}
+  .ostep .olbl{font-size:11px;color:var(--label2);text-align:center}
+  .ostep.on .olbl{color:var(--label)}
+  .obar{flex:1;height:2px;background:var(--sep)}
+  .obar.on{background:var(--acc)}
+
+  .strow{display:flex;gap:14px;overflow-x:auto;padding:8px 16px 10px;scrollbar-width:none}
+  .strow::-webkit-scrollbar{display:none}
+  .story{flex:none;width:66px;text-align:center;cursor:pointer}
+  .story .sring{width:62px;height:62px;border-radius:31px;padding:3px;margin:0 auto}
+  .story .sinner{width:100%;height:100%;border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:26px;background:#0E0F13}
+  .story .slbl{font-size:10px;color:var(--label2);margin-top:5px;line-height:1.15}
+  #storybg{position:absolute;inset:0;z-index:90;display:none}
+  #storybg.on{display:block}
+  .stfull{position:absolute;inset:0;display:flex;flex-direction:column;color:#fff;padding:14px 18px 24px;cursor:pointer}
+  .stbars{display:flex;gap:5px;margin-bottom:16px}
+  .stbars span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3)}
+  .stbars span.on{background:#fff}
+  .stclose{position:absolute;top:44px;right:18px;font-size:24px;color:#fff;cursor:pointer;z-index:3}
+  .stbody{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .stbody .sg{font-size:60px;margin-bottom:14px}
+  .stbody h2{font-size:32px;font-weight:800;letter-spacing:-.5px}
+  .stbody p{font-size:17px;opacity:.92;margin-top:8px}
+  .bndls{display:flex;gap:12px;overflow-x:auto;padding:6px 16px 14px;scrollbar-width:none}
+  .bndls::-webkit-scrollbar{display:none}
+  .bndl{flex:none;width:228px;border-radius:16px;overflow:hidden;cursor:pointer;border:1px solid var(--sep);background:var(--card)}
+  .bndl .bh{height:80px;display:flex;align-items:center;justify-content:center;font-size:38px}
+  .bndl .bb{padding:10px 12px}
+  .bndl .bn{font-size:15px;font-weight:700}
+  .bndl .bm{font-size:12px;color:var(--label2);margin-top:2px}
+  .bndl .bp{margin-top:8px;display:flex;align-items:center;gap:8px}
+

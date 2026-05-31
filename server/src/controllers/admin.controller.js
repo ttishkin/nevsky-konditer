@@ -1,0 +1,10 @@
+const svc = require("../services/adminService");
+const asyncHandler = require("../utils/asyncHandler");
+exports.orders = asyncHandler(async (req, res) => res.json(svc.orders()));
+exports.stats = asyncHandler(async (req, res) => res.json(svc.stats()));
+exports.setStatus = asyncHandler(async (req, res) => res.json(svc.setStatus(Number(req.params.id), req.body.status)));
+exports.statuses = asyncHandler(async (req, res) => res.json(svc.STATUSES));
+exports.notifications = asyncHandler(async (req, res) => res.json(svc.notifications()));
+exports.users = asyncHandler(async (req, res) => res.json(svc.users()));
+exports.userDetail = asyncHandler(async (req, res) => res.json(svc.userDetail(Number(req.params.id))));
+exports.sales = asyncHandler(async (req, res) => res.json(svc.sales(Number(req.query.days) || 14)));

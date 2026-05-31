@@ -1,0 +1,13 @@
+const r = require("express").Router();
+const c = require("../controllers/admin.controller");
+const { adminRequired } = require("../middleware/auth");
+r.use(adminRequired);
+r.get("/orders", c.orders);
+r.get("/stats", c.stats);
+r.get("/statuses", c.statuses);
+r.get("/notifications", c.notifications);
+r.get("/users", c.users);
+r.get("/users/:id", c.userDetail);
+r.get("/sales", c.sales);
+r.patch("/orders/:id/status", c.setStatus);
+module.exports = r;

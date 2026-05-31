@@ -1,0 +1,33 @@
+/* styles/07-theme-light.css — Светлая тема */
+  :root[data-theme="light"]{--bg:#F2F2F7;--bg2:#FFFFFF;--card:#FFFFFF;--card2:#FFFFFF;--sep:rgba(0,0,0,.12);--label:#11131A;--label2:#6B7280;--label3:#A6AAB4;--acc:#2FA84F;--accTx:#FFFFFF;--blue:#2FA84F;}
+  :root[data-theme="light"] body{background:#c9ccd2}
+  :root[data-theme="light"] .search{background:rgba(0,0,0,.05)}
+  :root[data-theme="light"] .chip{background:rgba(0,0,0,.05)}
+  :root[data-theme="light"] .btn.sec{background:rgba(0,0,0,.06)}
+  :root[data-theme="light"] .seg{background:rgba(0,0,0,.06)}
+  :root[data-theme="light"] .seg button.on{background:#fff;color:#11131A}
+  :root[data-theme="light"] .qty button{background:rgba(0,0,0,.06)}
+  :root[data-theme="light"] .bar{background:rgba(0,0,0,.08)}
+  :root[data-theme="light"] .row:active{background:rgba(0,0,0,.03)}
+  :root[data-theme="light"] #tabbar{background:rgba(255,255,255,.92)}
+  :root[data-theme="light"] .odots span{background:rgba(0,0,0,.12)}
+  :root[data-theme="light"] .odots span.on{background:var(--acc)}
+  :root[data-theme="light"] .story .sinner{background:#F2F2F7}
+  :root[data-theme="light"] .delivbar .dprog{background:rgba(0,0,0,.08)}
+  :root[data-theme="light"] .pgdot{background:rgba(0,0,0,.25)}
+  :root[data-theme="light"] .crate{color:#B8860B}
+  :root[data-theme="light"] #frame{border-color:#1b1b1e}
+
+  .bell{position:absolute;right:18px;top:12px;font-size:22px;cursor:pointer;line-height:1}
+  .bell .bdot{position:absolute;top:-1px;right:-2px;width:9px;height:9px;border-radius:5px;background:var(--pink);border:2px solid var(--bg)}
+  .loycard{margin:6px 16px 4px;background:var(--card);border:1px solid var(--sep);border-radius:var(--r);padding:16px}
+  .loytop{display:flex;justify-content:space-between;align-items:center}
+
+  .ymap{height:300px;border-radius:14px;overflow:hidden;background:var(--card2);border:1px solid var(--sep)}
+
+  .sw{width:44px;height:26px;border-radius:13px;background:rgba(120,120,130,.45);position:relative;flex:none;transition:background .2s}
+  .sw:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:10px;background:#fff;transition:left .2s}
+  .sw.on{background:var(--acc)}
+  .sw.on:after{left:21px}
+.meal .listcard{margin-left:0;margin-right:0}
+.qty b{display:inline-flex;align-items:center;justify-content:center;line-height:1}

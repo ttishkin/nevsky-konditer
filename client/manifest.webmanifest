@@ -1,0 +1,16 @@
+{
+  "name": "Невский Кондитер — ЗОЖ",
+  "short_name": "НК ЗОЖ",
+  "description": "Полезные сладости и организация правильного питания",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0E0F13",
+  "theme_color": "#0E0F13",
+  "icons": [
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

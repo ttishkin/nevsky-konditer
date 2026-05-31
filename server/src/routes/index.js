@@ -1,0 +1,17 @@
+// Сборка всех маршрутов API под /api
+const r = require("express").Router();
+r.use("/auth", require("./auth.routes"));
+r.use("/products", require("./products.routes"));
+r.use("/categories", require("./categories.routes"));
+r.use("/orders", require("./orders.routes"));
+r.use("/reviews", require("./reviews.routes"));
+r.use("/bonuses", require("./bonuses.routes"));
+r.use("/diary", require("./diary.routes"));
+r.use("/addresses", require("./addresses.routes"));
+r.use("/pickup-points", require("./pickup.routes"));
+r.use("/cart", require("./cart.routes"));
+r.use("/favorites", require("./favorites.routes"));
+r.use("/notifications", require("./notifications.routes"));
+r.use("/admin", require("./admin.routes"));
+r.use("/promo", require("./promo.routes"));
+module.exports = r;

@@ -1,0 +1,26 @@
+{
+  "name": "nevsky-konditer",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Мобильное приложение «Невский Кондитер — ЗОЖ»: правильное питание + магазин полезных сладостей. Клиент (PWA) + бэкенд (Node.js/Express/SQLite).",
+  "scripts": {
+    "install:all": "npm --prefix server install",
+    "start": "npm --prefix server start",
+    "setup": "npm --prefix server run setup",
+    "test": "npm --prefix server test",
+    "dev": "npm --prefix server run dev"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "license": "MIT",
+  "author": "Дипломный проект",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

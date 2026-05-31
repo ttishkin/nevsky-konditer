@@ -1,0 +1,27 @@
+{
+  "name": "nevsky-konditer-backend",
+  "version": "2.0.0",
+  "description": "Бэкенд приложения «Невский Кондитер — ЗОЖ»: SQLite, авторизация, каталог, заказы, бонусы, дневник",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --no-warnings server.js",
+    "migrate": "node --no-warnings src/db/migrate.js",
+    "seed": "node --no-warnings src/db/seed.js",
+    "setup": "npm run migrate && npm run seed",
+    "dev": "node --no-warnings server.js",
+    "test": "node --no-warnings --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.13",
+    "swagger-ui-express": "^5.0.0",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.4.0"
+  },
+  "license": "MIT"
+}
