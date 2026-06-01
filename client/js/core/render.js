@@ -24,5 +24,3 @@ function renderTabs(){
     return '<div class="tab '+on+'" data-act="tab" data-t="'+t[0]+'">'+badge+icon(t[0])+'<span>'+t[1]+'</span></div>';
   }).join('');
 }
-
-/* ---------------- SHEETS ---------------- */

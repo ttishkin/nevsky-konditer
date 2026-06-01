@@ -1,4 +1,3 @@
-// Проверка JWT из заголовка Authorization: Bearer <token>
 const token = require("../utils/token");
 const userRepo = require("../repositories/userRepo");
 function extract(req) {

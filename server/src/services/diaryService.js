@@ -3,7 +3,6 @@ const productRepo = require("../repositories/productRepo");
 const db = require("../db/index");
 const { bad } = require("../models/validate");
 
-// Товар приходит из репозитория в клиентском формате: { id, n, kcal, p, f, c, g, ... }
 function kcalForProduct(productId, grams) {
   const p = productRepo.byId(productId);
   if (!p) return null;

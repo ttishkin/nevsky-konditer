@@ -1,4 +1,3 @@
-// Подключение к SQLite (встроенный модуль node:sqlite, Node 22.5+)
 const { DatabaseSync } = require("node:sqlite");
 const fs = require("fs");
 const path = require("path");

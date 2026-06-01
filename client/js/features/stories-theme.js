@@ -1,7 +1,7 @@
 /* js/features/stories-theme.js
    Сторис, наборы, светлая/тёмная тема (v12-v13)
    Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
-/* ===== v12: stories, bundles ===== */
+
 var STORIES=[
  {t:"Скидки до −25%",s:"на любимое сладкое",g:"🏷️",bg:"linear-gradient(160deg,#FF375F,#7A1F4F)",ring:"linear-gradient(135deg,#FF375F,#FF9F0A)",act:"discounts"},
  {t:"Новинки",s:"свежие вкусы «Невского Кондитера»",g:"✨",bg:"linear-gradient(160deg,#5E5CE6,#241640)",ring:"linear-gradient(135deg,#8B7BFF,#5E5CE6)",act:"novelties"},
@@ -63,9 +63,8 @@ document.addEventListener("click",function(e){var el=e.target.closest("[data-act
   else if(a==="bundle")go("bundle",{b:+el.getAttribute("data-b")});
   else if(a==="addbundle"){var b=BUNDLES[+el.getAttribute("data-b")];if(b){b.ids.forEach(function(id){S.cart[id]=(S.cart[id]||0)+1;});save();S.stack=[];S.tab="cart";render();toast("Набор добавлен в корзину");}}
 });
-/* bootstrap render() -> js/app.js */
 
-/* ===== v13: light/dark theme ===== */
+
 S.theme=S.theme||LS.get("nk_theme","dark");
 function applyTheme(){try{document.documentElement.setAttribute("data-theme",S.theme==="light"?"light":"");var m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute("content",S.theme==="light"?"#F2F2F7":"#0E0F13");}catch(e){}}
 document.addEventListener("click",function(e){var el=e.target.closest('[data-act2="theme"]');if(!el)return;

@@ -42,5 +42,3 @@ function sel(a,b){return a===b?" selected":"";}
 function bindSeg(elid,key){var el=$(elid);if(!el)return;el.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
   [].forEach.call(el.children,function(x){x.classList.remove("on");});b.classList.add("on");S.onbForm[key]=b.getAttribute("data-v");});}
 function readOnbForm(){var f=S.onbForm;f.age=+$("o_age").value||25;f.height=+$("o_h").value||175;f.weight=+$("o_w").value||70;f.act=$("o_act").value;}
-
-/* ---------------- EVENTS ---------------- */

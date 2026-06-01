@@ -1,7 +1,7 @@
 /* js/features/loyalty-maps.js
    Лояльность, рефералка, FAQ, гид, карты (v14-v15)
    Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
-/* ===== v14: loyalty, recently viewed, referral, notifications, FAQ, guide ===== */
+
 S.recent=S.recent||LS.get("nk_recent",[]);
 S.notifRead=(LS.get("nk_notifread","")==="1");
 var NOTIFS=[
@@ -81,9 +81,8 @@ document.addEventListener("click",function(e){var el=e.target.closest("[data-act
   else if(a==="guideclose")closeStory();
   else if(a==="guidenext"){var n=(S._guide||0)+1;if(n>=GUIDE.length)closeStory();else openGuide(n);}
 });
-/* bootstrap render() -> js/app.js */
 
-/* ===== v15: Yandex map address + pickup points ===== */
+
 S.delivery=S.delivery||LS.get("nk_delivery",null);
 S.mapMode=S.mapMode||"courier";
 var SPB=[[59.70,29.55],[60.15,30.75]];

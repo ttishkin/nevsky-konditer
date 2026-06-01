@@ -1,6 +1,5 @@
 const db = require("../db/index");
 function tagsOf(id) { return db.prepare("SELECT tag FROM product_tags WHERE product_id=?").all(id).map((r) => r.tag); }
-// Маппинг строки БД -> формат, который ожидает клиент (короткие ключи)
 function toClient(row) {
   if (!row) return row;
   return {

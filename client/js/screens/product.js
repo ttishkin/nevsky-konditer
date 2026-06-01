@@ -27,5 +27,3 @@ function renderProduct(id){
      '<button class="btn" style="flex:1.3" data-act2="addq" data-id="'+id+'">В корзину</button></div>';
   return h;
 }
-
-/* ---------------- RENDER: DIARY ---------------- */

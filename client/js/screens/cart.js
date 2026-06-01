@@ -18,5 +18,3 @@ function renderCart(){
      '<div class="muted" style="font-size:12px;text-align:center;margin-top:10px">Оплата демонстрационная (прототип).</div></div>';
   return h;
 }
-
-/* ---------------- RENDER: PROFILE ---------------- */

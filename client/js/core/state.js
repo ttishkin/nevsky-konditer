@@ -9,5 +9,3 @@ var S={
   sheet:null
 };
 function save(){LS.set("nk_cart",S.cart);LS.set("nk_fav",S.fav);LS.set("nk_diary",S.diary);LS.set("nk_profile",S.profile);}
-
-/* ---------------- HELPERS ---------------- */

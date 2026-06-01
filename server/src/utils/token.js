@@ -1,4 +1,3 @@
-// JWT-токены
 const jwt = require("jsonwebtoken");
 const config = require("../config");
 exports.sign = (payload) => jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpires });

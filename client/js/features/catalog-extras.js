@@ -1,7 +1,7 @@
 /* js/features/catalog-extras.js
    Избранное, галерея, поиск, товар дня, категория (v7-v9)
    Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
-/* ===== v7: specs, favorites tab, fly-to-cart ===== */
+
 var SHELF={"Протеиновые батончики":"9 месяцев","Мармелад":"6 месяцев","Желейные конфеты":"9 месяцев"};
 function shelfLife(p){return SHELF[p.cat]||"12 месяцев";}
 function allergens(p){
@@ -45,9 +45,8 @@ document.addEventListener("click",function(e){
   requestAnimationFrame(function(){dot.style.transform='translate('+(cr.left+cr.width/2-sx)+'px,'+(cr.top+cr.height/2-sy)+'px) scale(.35)';dot.style.opacity='0.25';});
   setTimeout(function(){if(dot.parentNode)dot.parentNode.removeChild(dot);},560);
 },true);
-/* bootstrap render() -> js/app.js */
 
-/* ===== v8: gallery, search suggest, thank-you, haptic ===== */
+
 var POPQ=["без сахара","батончик","мармелад","протеин","орех","желе"];
 S.searchHistory=S.searchHistory||LS.get("nk_sh",[]);
 function galleryHTML(p){
@@ -77,9 +76,8 @@ document.addEventListener("click",function(e){
   var hp=e.target.closest('[data-act="addcart"],[data-act2="addq"],[data-act="pay"],[data-act="fav"],[data-act="checkout"],[data-act="inc"]');
   if(hp&&navigator.vibrate){try{navigator.vibrate(12);}catch(_){}}
 },true);
-/* bootstrap render() -> js/app.js */
 
-/* ===== v9: deal of day, goal shelf, category screen, delivery screen ===== */
+
 function dealOfDay(){
   var ids=Object.keys((typeof DISC!=='undefined'&&DISC)?DISC:{});
   if(!ids.length)return '';
@@ -133,5 +131,4 @@ document.addEventListener("click",function(e){
   if(a==="cat")go("category",{c:el.getAttribute("data-c")});
   else if(a==="delivery")go("delivery");
 });
-/* bootstrap render() -> js/app.js */
 

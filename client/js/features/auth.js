@@ -37,7 +37,6 @@
     if (typeof save === "function") save();
   }
 
-  // ---- двусторонняя синхронизация: тянем данные с сервера в интерфейс ----
   function mapDiary(list) {
     return (list || []).map(function (e) {
       if (e.productId) return { id: e.productId, grams: e.grams, qty: e.qty, meal: e.meal, _sid: e.id };
@@ -61,7 +60,6 @@
     authedFetch("/api/orders").then(function (r) { return r.ok ? r.json() : null; })
       .then(function (list) { if (list) { S.orders = mapOrders(list); LS.set("nk_orders", S.orders); if (typeof render === "function") render(); } })
       .catch(function () {});
-    // корзина
     authedFetch("/api/cart").then(function (r) { return r.ok ? r.json() : null; })
       .then(function (list) {
         if (!list) return;
@@ -69,10 +67,8 @@
         if (!list.length && localHas) { pushCart(); }
         else { S.cart = {}; list.forEach(function (it) { S.cart[it.id] = it.qty; }); LS.set("nk_cart", S.cart); if (typeof render === "function") render(); }
       }).catch(function () {});
-    // уведомления пользователя
     authedFetch("/api/notifications").then(function (r) { return r.ok ? r.json() : null; })
       .then(function (list) { if (list) { S.userNotifs = list; if (typeof render === "function") render(); } }).catch(function () {});
-    // избранное
     authedFetch("/api/favorites").then(function (r) { return r.ok ? r.json() : null; })
       .then(function (ids) {
         if (!ids) return;
@@ -166,7 +162,6 @@
     }
   });
 
-  // Добавление в дневник -> на сервер (с сохранением серверного id записи)
   document.addEventListener("click", function (e) {
     if (!e.target.closest('[data-act="confirmdiary"]')) return;
     if (!S.token || !hasFetch()) return;
@@ -179,7 +174,6 @@
     }, 60);
   });
 
-  // Изменение количества в дневнике -> PATCH на сервер
   document.addEventListener("click", function (e) {
     var b = e.target.closest('[data-act="diaryinc"], [data-act="diarydec"]');
     if (!b || !S.token || !hasFetch()) return;
@@ -189,7 +183,6 @@
     }, 80);
   });
 
-  // Удаление из дневника -> DELETE на сервер (читаем серверный id ДО удаления — фаза перехвата)
   document.addEventListener("click", function (e) {
     var del = e.target.closest('[data-act="deldiary"]');
     if (!del || !S.token || !hasFetch()) return;
@@ -197,14 +190,12 @@
     if (ent && ent._sid) { var sid = ent._sid; setTimeout(function () { authedFetch("/api/diary/" + sid, { method: "DELETE" }).catch(function () {}); }, 0); }
   }, true);
 
-  // Зеркалирование корзины на сервер (если выполнен вход)
   document.addEventListener("click", function (e) {
     if (!S.token || !hasFetch()) return;
     if (e.target.closest('[data-act="addcart"], [data-act="inc"], [data-act="dec"], [data-act2="addq"], [data-act2="setq"]')) {
       setTimeout(scheduleCartPush, 60);
     }
   });
-  // Зеркалирование избранного на сервер
   document.addEventListener("click", function (e) {
     if (!S.token || !hasFetch()) return;
     if (e.target.closest('[data-act="fav"]')) setTimeout(pushFav, 60);

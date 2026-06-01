@@ -29,5 +29,3 @@ function sheetCheckout(){
     '<button class="btn green" data-act="pay">Оплатить</button>'+
     '<div class="muted" style="font-size:12px;text-align:center;margin-top:10px">Демонстрация: реальная оплата не производится.</div>');
 }
-
-/* ---------------- ONBOARDING ---------------- */

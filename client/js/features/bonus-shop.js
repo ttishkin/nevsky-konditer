@@ -1,7 +1,7 @@
 /* js/features/bonus-shop.js
    Новинки и магазин за баллы (v16-v19)
    Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
-/* ===== fix: discounts catalog screen ===== */
+
 function renderDiscounts(){
   var ds=P.filter(function(p){return _disc(p);});
   var h='<div class="navbar"><div class="back" data-act="back">'+icon("back","#C7F94B")+'Каталог</div><div class="title">Скидки и акции</div><div class="spacer"></div></div>';
@@ -15,9 +15,8 @@ function renderDiscounts(){
   if(top&&top.screen==="discounts"){var app=$("app");if(!app)return;app.innerHTML=renderDiscounts();renderTabs();app.classList.remove('nav-push','nav-pop','nav-fade');void app.offsetWidth;app.classList.add('nav-push');var ims=app.querySelectorAll('img.pimg,img.himg');for(var i=0;i<ims.length;i++){var im=ims[i];if(im.complete&&im.naturalWidth>0)im.classList.add('ld');else im.addEventListener('load',function(){this.classList.add('ld');});}return;}
   _rd();
 };})();
-/* bootstrap render() -> js/app.js */
 
-/* ===== v16: novelties + bonuses screens + bonus spending ===== */
+
 S.useBonus=S.useBonus||false;
 function cashbackPct(){var l=loyalty();return l.name==="Золото"?10:(l.name==="Серебро"?7:5);}
 function bonusSpend(){return S.useBonus?Math.min(S.points||0,Math.floor(cartTotal()*0.3)):0;}
@@ -56,7 +55,7 @@ document.addEventListener("click",function(e){var el=e.target.closest("[data-act
 });
 document.addEventListener("click",function(e){if(e.target.closest('[data-act="onb-finish"]')){if(!LS.get("nk_welcome","")){S.points=(S.points||0)+200;LS.set("nk_pts",S.points);LS.set("nk_welcome","1");}}});
 
-/* ===== v17: dedicated Бонусы tab ===== */
+
 function renderBonusTab(){
   var l=loyalty();var pct=cashbackPct();
   var h='<div class="lt">Бонусы</div>';
@@ -71,9 +70,8 @@ function renderBonusTab(){
   if(!S.stack.length&&S.tab==="bonus"){var app=$("app");if(!app)return;app.innerHTML=renderBonusTab();renderTabs();app.classList.remove('nav-push','nav-pop','nav-fade');void app.offsetWidth;app.classList.add('nav-fade');return;}
   _r17();
 };})();
-/* bootstrap render() -> js/app.js */
 
-/* ===== v18: Бонусы tab = магазин за баллы (ценники в баллах) ===== */
+
 function bcardHTML(p){
   var pr=priceOf(p);var can=(S.points||0)>=pr;
   return '<div class="pcard" data-act="open" data-id="'+p.id+'">'+saleBadge(p)+thumb(p)+
@@ -98,9 +96,8 @@ document.addEventListener("click",function(e){
   if(typeof S.redeemed!=="undefined"){S.redeemed.unshift(p.id);}else{S.redeemed=[p.id];}
   render();toast("Обменяно за "+pr+" баллов 🎁");
 });
-/* bootstrap render() -> js/app.js */
 
-/* ===== v19: universal image fade-in (fixes invisible photos on bonus/other custom screens) ===== */
+
 (function(){var _rimg=render;render=function(){
   _rimg();
   try{var app=document.getElementById('app');if(!app)return;
@@ -111,5 +108,4 @@ document.addEventListener("click",function(e){
     }
   }catch(e){}
 };})();
-/* bootstrap render() -> js/app.js */
 

@@ -1,7 +1,7 @@
 /* js/features/orders-scanner.js
    Заказы, экраны about/план, сканер, дополнение экранов (v2)
    Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
-/* ===== v2 features: orders, about, plan, scanner ===== */
+
 S.orders = LS.get("nk_orders", []);
 S.plan = LS.get("nk_plan", null);
 
@@ -133,5 +133,4 @@ document.addEventListener("click",function(e){
   else if(a==="reorder"){var o=S.orders.filter(function(x){return x.ts==id;})[0];if(o){o.items.forEach(function(it){S.cart[it.id]=(S.cart[it.id]||0)+it.q;});save();S.stack=[];S.tab="cart";render();toast("Товары добавлены в корзину");}}
 });
 
-/* bootstrap render() -> js/app.js */
 

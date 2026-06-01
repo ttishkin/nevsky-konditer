@@ -1,7 +1,7 @@
 /* js/features/enhancements.js
    Экран лояльности, бюджет на сладкое, редактирование дневника (v20-v29)
    Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
-/* ===== v20: loyalty screen + collapsible "Ещё" ===== */
+
 S.moreOpen=S.moreOpen||false;
 loyaltyCard=function(){
   var l=loyalty();var col=l.name==="Золото"?"#E8C24A":(l.name==="Серебро"?"#C0C5CE":"#CD7F32");
@@ -50,9 +50,8 @@ document.addEventListener("click",function(e){var el=e.target.closest("[data-act
   if(a==="loyalty")go("loyalty");
   else if(a==="togglemore"){S.moreOpen=!S.moreOpen;var _c=el.nextElementSibling;if(_c&&_c.classList&&_c.classList.contains("listcard"))_c.style.display=S.moreOpen?"":"none";el.innerHTML='Ещё <span style="color:var(--label3);font-weight:400">'+(S.moreOpen?"▾":"▸")+'</span>';}
 });
-/* bootstrap render() -> js/app.js */
 
-/* ===== v22: "бюджет на сладкое" (20% нормы) вместо полной нормы ===== */
+
 function sweetBudget(){return Math.round(norm()*0.20);}
 renderDiary=function(){
   var t=diaryTotals();var k=sweetBudget();var rem=k-t.kcal;
@@ -115,10 +114,9 @@ renderOnb=function(){
   }
 };
 if($("onb")&&$("onb").style.display!=="none"){renderOnb();}
-/* bootstrap render() -> js/app.js */
 
 
-/* ===== v28: трекер «Белок из перекусов» + убрана кнопка из нуджа ===== */
+
 renderDiary=function(){
   var t=diaryTotals();var k=sweetBudget();var rem=k-t.kcal;
   var pgoal=15;var pcur=t.p;var ppct=Math.min(Math.round(pcur/pgoal*100),100);
@@ -160,9 +158,8 @@ renderDiary=function(){
 document.addEventListener("click",function(e){
   if(e.target.closest('[data-act2="proteinsnacks"]')){if(typeof go==="function")go("category",{c:"Злаковые батончики"});}
 });
-/* bootstrap render() -> js/app.js */
 
-/* ===== v29: убран трекер белка; редактируемое количество в дневнике ===== */
+
 function adjustDiary(i,delta){var e=S.diary[i];if(!e)return;var p=prod(e.id);var g=(p&&p.g)?p.g:(e.grams||1);var q=e.qty||Math.max(1,Math.round((e.grams||g)/g));q=Math.max(1,q+delta);e.qty=q;e.grams=q*g;save();render();}
 renderDiary=function(){
   var t=diaryTotals();var k=sweetBudget();var rem=k-t.kcal;
@@ -201,4 +198,3 @@ document.addEventListener("click",function(ev){
   var inc=ev.target.closest('[data-act="diaryinc"]');if(inc){adjustDiary(+inc.getAttribute("data-i"),1);return;}
   var dec=ev.target.closest('[data-act="diarydec"]');if(dec){adjustDiary(+dec.getAttribute("data-i"),-1);return;}
 });
-/* bootstrap render() -> js/app.js */

@@ -31,8 +31,6 @@ function renderDiary(){
   }
   return h;
 }
-
-/* ---------------- RENDER: RECOMMEND ---------------- */
 function renderRecommend(){
   var t=diaryTotals();var rem=sweetBudget()-t.kcal;
   var fit=P.filter(function(p){return portionKcal(p)<=Math.max(rem,0);}).sort(function(a,b){return portionKcal(a)-portionKcal(b);});
@@ -51,5 +49,3 @@ function renderRecommend(){
   }
   return h;
 }
-
-/* ---------------- RENDER: CART ---------------- */

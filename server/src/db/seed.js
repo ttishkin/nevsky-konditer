@@ -1,4 +1,3 @@
-// Наполнение БД (идемпотентно). Запуск: npm run seed
 const fs = require("fs");
 const path = require("path");
 const db = require("./index");

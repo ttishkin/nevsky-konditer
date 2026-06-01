@@ -1,5 +1,3 @@
-// Отправка писем через nodemailer.
-// Приоритет: SMTP из .env -> (опц.) тестовый Ethereal -> запись в лог (демо).
 const logger = require("./logger");
 let nodemailer = null;
 try { nodemailer = require("nodemailer"); } catch (e) { /* пакет не установлен — работаем в режиме лога */ }

@@ -29,5 +29,3 @@ function renderProfile(){
   return h;
 }
 function row2(a,b){return '<div class="row" style="cursor:default"><div class="gname" style="flex:1">'+a+'</div><div class="sub" style="font-size:16px;color:var(--label)">'+esc(String(b))+'</div></div>';}
-
-/* ---------------- MAIN RENDER ---------------- */

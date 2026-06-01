@@ -5,5 +5,3 @@ var IMG={"1":"https://konditer.net/upload/resize_cache/iblock/13e/260_260_1/2ic2
 function imgFallback(im){im.style.display='none';var g=im.parentNode.querySelector('.gf');if(g)g.style.display='';}
 var TAGLABEL={sugar:"Без сахара",prot:"С белком",fat:"Без жира",nut:"С орехами"};
 var TAGCLASS={sugar:"t-sugar",prot:"t-prot",fat:"t-fat",nut:"t-nut"};
-
-/* ---------------- STATE ---------------- */

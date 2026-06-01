@@ -1,4 +1,3 @@
-// OpenAPI 3.0 спецификация API (для Swagger UI на /api/docs)
 const bearer = [{ bearerAuth: [] }];
 module.exports = {
   openapi: "3.0.3",

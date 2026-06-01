@@ -30,8 +30,6 @@ function tagPills(p){
   if(!p.tags.length)return '';
   return '<div class="tags" style="margin-top:6px">'+p.tags.map(function(t){return '<span class="tag '+TAGCLASS[t]+'">'+TAGLABEL[t]+'</span>';}).join('')+'</div>';
 }
-
-/* ---------------- RENDER: CATALOG ---------------- */
 function matchFilter(p){
   if(S.filter!=="all"&&p.tags.indexOf(S.filter)<0)return false;
   if(S.query){var q=S.query.toLowerCase();if(p.n.toLowerCase().indexOf(q)<0&&p.cat.toLowerCase().indexOf(q)<0)return false;}

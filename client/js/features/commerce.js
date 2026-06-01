@@ -1,7 +1,7 @@
 /* js/features/commerce.js
    Доставка, рейтинги, скидки/промокоды, баннеры, share (v3-v6)
    Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
-/* ===== v3 polish: transitions, image fade, free-delivery ===== */
+
 function deliveryBar(){
   var t=cartTotal();var FREE=1000;
   if(t>=FREE)return '<div class="delivok">🚚 Бесплатная доставка подключена</div>';
@@ -24,9 +24,6 @@ function deliveryBar(){
     }
   };
 })();
-/* bootstrap render() -> js/app.js */
-
-/* ===== v4 commerce: ratings, related, quantity, delivery ===== */
 function rating(p){return {s:(4.3+((p.id*7)%6)/10).toFixed(1), c:14+((p.id*37)%230)};}
 function stars(p){var r=rating(p);return '<span class="rate"><span class="st">★</span> '+r.s+' <span class="muted" style="font-size:12px;font-weight:400">· '+r.c+' оценок</span></span>';}
 function relatedBlock(p){
@@ -45,7 +42,7 @@ document.addEventListener("click",function(e){
   else if(a==="addq"){S.cart[id]=(S.cart[id]||0)+(S._q||1);save();renderTabs();toast("Добавлено в корзину: "+(S._q||1));}
 });
 
-/* ===== v5: discounts, promo, reviews, sorting ===== */
+
 var DISC={3:15,8:20,10:15,19:25,24:20};
 S.promo=S.promo||0;S.sort=S.sort||"pop";
 function _disc(p){return (typeof DISC!=='undefined'&&DISC&&DISC[p.id])?DISC[p.id]:0;}
@@ -73,9 +70,6 @@ document.addEventListener("click",function(e){
   if(a==="promo"){var inp=document.getElementById("ck_promo");var v=(inp?inp.value:"").trim().toUpperCase();if(v==="ЗОЖ10"||v==="ZOZH10"){S.promo=10;toast("Промокод применён: −10%");}else{S.promo=0;toast("Промокод не найден");}sheetCheckout();}
   else if(a==="sort"){var s=el.getAttribute("data-s");S.sort=(S.sort===s)?"":s;render();}
 });
-/* bootstrap render() -> js/app.js */
-
-/* ===== v6: home banners, discounts shelf, share ===== */
 function banners(){
   var B=[
     ["binfo","","Скидки до −25%","на сладкое — смотри «Выгодно»","linear-gradient(135deg,#FF375F,#7A1F4F)"],
@@ -99,5 +93,4 @@ document.addEventListener("click",function(e){
     else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast("Ссылка скопирована");},function(){toast("Поделиться: готово");});}
     else{toast("Поделиться: готово");}}
 });
-/* bootstrap render() -> js/app.js */
 

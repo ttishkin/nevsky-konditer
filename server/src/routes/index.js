@@ -1,4 +1,3 @@
-// Сборка всех маршрутов API под /api
 const r = require("express").Router();
 r.use("/auth", require("./auth.routes"));
 r.use("/products", require("./products.routes"));

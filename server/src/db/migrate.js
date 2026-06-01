@@ -1,4 +1,3 @@
-// Применение схемы БД (идемпотентно). Запуск: npm run migrate
 const fs = require("fs");
 const path = require("path");
 const db = require("./index");

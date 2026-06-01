@@ -33,5 +33,3 @@ function renderCatalog(){
   }
   return h;
 }
-
-/* ---------------- RENDER: PRODUCT ---------------- */

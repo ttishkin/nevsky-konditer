@@ -1,4 +1,3 @@
-// Инициализация БД при старте сервера: схема + сидинг при пустой базе
 const db = require("./index");
 const { applySchema } = require("./migrate");
 const { seed } = require("./seed");
