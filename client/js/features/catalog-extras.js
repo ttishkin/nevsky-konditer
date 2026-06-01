@@ -65,7 +65,6 @@ function searchSuggest(){
   h+='<div class="sec">Популярное</div><div class="chips">'+pop.map(function(q){return '<div class="chip" data-act2="setq" data-q="'+q+'">'+q+'</div>';}).join('')+'</div>';
   return h;
 }
-var SHELF={"Протеиновые батончики":"9 месяцев","Мармелад":"6 месяцев","Желейные конфеты":"9 месяцев"};
 function shelfLife(p){var t=(typeof SHELF!=='undefined'&&SHELF)?SHELF[p.cat]:0;return t||"12 месяцев";}
 function deliveryDate(){var d=new Date(Date.now()+2*86400000);var m=["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];return d.getDate()+" "+m[d.getMonth()];}
 (function(){var _r8=render;render=function(){_r8();var g=document.getElementById('pgal');if(g&&!g._wired){g._wired=1;g.addEventListener('scroll',function(){var i=Math.round(g.scrollLeft/Math.max(1,g.clientWidth));var dots=g.parentNode.querySelectorAll('.pgdot');for(var k=0;k<dots.length;k++)dots[k].className='pgdot'+(k===i?' on':'');});}};})();

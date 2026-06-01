@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(js|sql|json\\)$\")",
+      "Bash(grep -n \"data-act2=\" js/features/*.js js/screens/*.js js/ui/*.js)",
+      "Bash(grep -n \"bad\\(\" /Users/mykytatishkin/Desktop/nevsky-konditer/server/src/services/*.js)",
+      "Bash(grep:*)",
+      "Bash(sqlite3 /dev/null \"SELECT MAX\\(0, -5\\);\")",
+      "Bash(npm test:*)",
+      "Bash(npm install:*)",
+      "Bash(timeout 5 node --no-warnings server/server.js)",
+      "Bash(node:*)"
+    ]
+  }
+}
