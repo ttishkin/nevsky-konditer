@@ -44,6 +44,6 @@ exports.create = (body, user) => {
 exports.listByUser = (user) => orderRepo.byUser(user.id);
 exports.get = (id, user) => {
   const o = orderRepo.byId(id);
-  if (!o || (user && o.user_id && o.user_id !== user.id)) { const e = new Error("Заказ не найден"); e.status = 404; throw e; }
+  if (!o || (user && o.user_id && o.user_id !== user.id)) throw bad("Заказ не найден", 404);
   return o;
 };

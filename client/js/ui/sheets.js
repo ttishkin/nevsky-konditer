@@ -1,6 +1,4 @@
-/* js/ui/sheets.js
-   Нижние шторки: добавление в дневник, оформление
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/ui/sheets.js — нижние шторки: добавление в дневник, оформление */
 function openSheet(html){$("sheet").innerHTML='<div class="grip"></div>'+html;$("sheetbg").classList.add("on");}
 function closeSheet(){$("sheetbg").classList.remove("on");}
 function sheetAddDiary(id){
@@ -21,11 +19,13 @@ function sheetCheckout(){
   openSheet('<div style="font-size:20px;font-weight:800;margin-bottom:10px">Оформление заказа</div>'+
     '<div class="field"><label>Имя получателя</label><input id="ck_name" value="'+(S.profile&&S.profile.name?esc(S.profile.name):"")+'" placeholder="Ваше имя"></div>'+
     deliveryField()+
-    '<div class="field"><label>Способ оплаты</label><div class="seg"><button class="on">Картой</button><button>При получении</button></div></div>'+
+    '<div class="field"><label>Способ оплаты</label><div class="seg" id="payseg"><button class="on">Картой</button><button>При получении</button></div></div>'+
     '<div class="field"><label>Промокод</label><div style="display:flex;gap:8px"><input id="ck_promo" placeholder="Напр. ЗОЖ10" value="'+(S.promo?"ЗОЖ10":"")+'"><button class="btn sec" style="width:auto;padding:13px 18px" data-act2="promo">ОК</button></div></div>'+
     bonusField()+
     '<div class="cobreak"><div class="corow"><span>Товары</span><span>'+money(cartTotal())+'</span></div>'+(S.promo?'<div class="corow"><span>Скидка '+S.promo+'%</span><span style="color:var(--acc)">−'+money(promoDisc())+'</span></div>':'')+'<div class="corow"><span>Доставка</span><span>'+(shipping()?money(shipping()):'бесплатно')+'</span></div>'+(bonusSpend()?'<div class="corow"><span>Списано баллами</span><span style="color:var(--acc)">−'+money(bonusSpend())+'</span></div>':'')+'</div>'+
     '<div class="totalbar"><span>К оплате</span><b>'+money(payable())+'</b></div>'+
     '<button class="btn green" data-act="pay">Оплатить</button>'+
     '<div class="muted" style="font-size:12px;text-align:center;margin-top:10px">Демонстрация: реальная оплата не производится.</div>');
+  var ps=$("payseg");if(ps)ps.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+    [].forEach.call(ps.children,function(x){x.classList.remove("on");});b.classList.add("on");});
 }

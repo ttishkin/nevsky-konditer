@@ -1,6 +1,4 @@
-/* js/core/helpers.js
-   Утилиты: $, esc, money, hexA, prod, счётчики корзины, toast
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/core/helpers.js — утилиты: $, esc, money, hexA, prod, счётчики корзины, toast */
 function $(id){return document.getElementById(id);}
 function hexA(h,a){var n=parseInt(h.slice(1),16);return "rgba("+((n>>16)&255)+","+((n>>8)&255)+","+(n&255)+","+a+")";}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}

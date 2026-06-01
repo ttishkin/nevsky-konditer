@@ -1,6 +1,4 @@
-/* js/screens/catalog.js
-   Экран каталога (витрина)
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/screens/catalog.js — экран каталога (витрина) */
 function renderCatalog(){
   var list=P.filter(matchFilter);
   var chips=[["all","Все"],["sugar","Без сахара"],["prot","С белком"],["fat","Без жира"],["nut","С орехами"]];

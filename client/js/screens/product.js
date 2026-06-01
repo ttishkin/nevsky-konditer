@@ -1,6 +1,4 @@
-/* js/screens/product.js
-   Экран карточки товара
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/screens/product.js — экран карточки товара */
 function renderProduct(id){
   var p=prod(id);if(!p)return renderCatalog();if(!S._q)S._q=1;
   var ct=CATS[p.cat];var fav=S.fav.indexOf(id)>=0;

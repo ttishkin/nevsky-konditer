@@ -1,6 +1,4 @@
-/* js/features/orders-scanner.js
-   Заказы, экраны about/план, сканер, дополнение экранов (v2)
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/features/orders-scanner.js — заказы, экраны about/план, сканер, дополнение экранов */
 
 S.orders = LS.get("nk_orders", []);
 S.plan = LS.get("nk_plan", null);

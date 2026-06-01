@@ -1,6 +1,4 @@
-/* js/features/commerce.js
-   Доставка, рейтинги, скидки/промокоды, баннеры, share (v3-v6)
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/features/commerce.js — доставка, рейтинги, скидки/промокоды, баннеры, share */
 
 function deliveryBar(){
   var t=cartTotal();var FREE=1000;

@@ -1,6 +1,4 @@
-/* js/screens/onboarding.js
-   Расчёт нормы и онбординг
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/screens/onboarding.js — расчёт нормы и онбординг */
 function calcKcal(f){
   var bmr=10*f.weight+6.25*f.height-5*f.age+(f.sex==="m"?5:-161);
   var tdee=bmr*parseFloat(f.act);

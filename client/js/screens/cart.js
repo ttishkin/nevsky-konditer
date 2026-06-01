@@ -1,6 +1,4 @@
-/* js/screens/cart.js
-   Экран корзины
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/screens/cart.js — экран корзины */
 function renderCart(){
   var ids=Object.keys(S.cart).filter(function(k){return S.cart[k]>0;});
   var h='<div class="lt">Корзина</div>';

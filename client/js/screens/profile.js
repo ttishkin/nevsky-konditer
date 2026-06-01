@@ -1,6 +1,4 @@
-/* js/screens/profile.js
-   Экран профиля
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/screens/profile.js — экран профиля */
 function actLabel(a){return {"1.2":"Минимальная","1.375":"Лёгкая","1.55":"Средняя","1.725":"Высокая"}[a]||a;}
 function goalLabel(g){return {lose:"Похудение",keep:"Поддержание",gain:"Набор массы"}[g]||g;}
 function renderProfile(){

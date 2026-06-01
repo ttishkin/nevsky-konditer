@@ -1,6 +1,4 @@
-/* js/features/bonus-shop.js
-   Новинки и магазин за баллы (v16-v19)
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/features/bonus-shop.js — новинки и магазин за баллы */
 
 function renderDiscounts(){
   var ds=P.filter(function(p){return _disc(p);});

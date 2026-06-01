@@ -14,7 +14,7 @@ const openapi = require("./docs/openapi");
 
 const app = express();
 app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false, crossOriginResourcePolicy: false }));
-app.use(express.json());
+app.use(express.json({ limit: "64kb" }));
 app.use(cors);
 app.use(requestLogger);
 

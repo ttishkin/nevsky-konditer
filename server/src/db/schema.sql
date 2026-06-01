@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS pickup_points (
 CREATE TABLE IF NOT EXISTS promo_codes (
   id               INTEGER PRIMARY KEY AUTOINCREMENT,
   code             TEXT UNIQUE NOT NULL,
-  discount_percent INTEGER NOT NULL,
+  discount_percent INTEGER NOT NULL CHECK (discount_percent >= 0 AND discount_percent <= 100),
   active           INTEGER NOT NULL DEFAULT 1
 );
 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
   user_id    INTEGER REFERENCES users(id) ON DELETE SET NULL,
   author     TEXT,
-  rating     INTEGER NOT NULL,
+  rating     INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
   text       TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
@@ -134,6 +134,7 @@ CREATE INDEX IF NOT EXISTS idx_orders_user ON orders(user_id);
 CREATE INDEX IF NOT EXISTS idx_diary_user_day ON diary_entries(user_id, day);
 CREATE INDEX IF NOT EXISTS idx_reviews_product ON reviews(product_id);
 CREATE INDEX IF NOT EXISTS idx_bonus_user ON bonus_transactions(user_id);
+CREATE INDEX IF NOT EXISTS idx_product_tags_tag ON product_tags(tag);
 
 CREATE TABLE IF NOT EXISTS cart_items (
   user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -155,3 +156,5 @@ CREATE TABLE IF NOT EXISTS notifications (
   message    TEXT NOT NULL,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+CREATE INDEX IF NOT EXISTS idx_notifications_email ON notifications(email);

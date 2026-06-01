@@ -1,6 +1,4 @@
-/* js/features/enhancements.js
-   Экран лояльности, бюджет на сладкое, редактирование дневника (v20-v29)
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/features/enhancements.js — экран лояльности, бюджет на сладкое, редактирование дневника */
 
 S.moreOpen=S.moreOpen||false;
 loyaltyCard=function(){
@@ -53,36 +51,7 @@ document.addEventListener("click",function(e){var el=e.target.closest("[data-act
 
 
 function sweetBudget(){return Math.round(norm()*0.20);}
-renderDiary=function(){
-  var t=diaryTotals();var k=sweetBudget();var rem=k-t.kcal;
-  var h='<div class="lt">Дневник сладкого</div><div class="muted" style="padding:0 20px 4px">Сегодня · бюджет на сладкое и перекусы</div>';
-  h+='<div class="ringwrap">'+
-     '<div class="ring">'+ringSVG(t.kcal,k)+'<div class="ctr"><div class="big">'+(rem>=0?rem:0)+'</div><div class="sm">'+(rem>=0?"ккал осталось":"на сегодня всё")+'</div></div></div>'+
-     '<div class="macros">'+
-       '<div style="font-size:14px;font-weight:600">Бюджет на сладкое</div>'+
-       '<div style="font-size:13px;color:var(--label2)">Съедено '+t.kcal+' из '+k+' ккал</div>'+
-       '<div style="font-size:12px;color:var(--label3);line-height:1.45">≈20% дневной нормы ('+norm()+' ккал)<br>Б '+t.p+' · Ж '+t.f+' · У '+t.c+' г</div>'+
-     '</div></div>';
-  if(rem>=0){h+='<div style="padding:8px 16px"><button class="btn green" data-act="recommend">Подобрать перекус под остаток'+(rem>0?" ("+rem+" ккал)":"")+'</button></div>';}else{h+='<div style="margin:10px 16px;padding:14px 16px;border-radius:16px;background:rgba(255,178,62,.12);border:1px solid rgba(255,178,62,.32)"><div style="font-size:15px;font-weight:700;color:#FFB23E">🍫 Сегодня вы порадовали себя!</div><div style="font-size:13px;color:var(--label2);margin:4px 0 11px;line-height:1.45">Это нормально — завтра бюджет на сладкое обновится. А пока подберём лёгкие снэки на завтра.</div><button class="btn green" data-act="recommend">Подобрать лёгкие снэки ›</button></div>';}
-  if(!S.diary.length){
-    h+='<div class="empty"><span class="gl">🍬</span>Пока пусто.<br>Добавляйте сладости и перекусы — увидите, сколько ещё можно сегодня без вреда.</div>';
-  } else {
-    var meals={"Завтрак":[],"Обед":[],"Ужин":[],"Перекус":[]};
-    S.diary.forEach(function(e,i){(meals[e.meal]||meals["Перекус"]).push({e:e,i:i});});
-    for(var m in meals){
-      if(!meals[m].length)continue;
-      h+='<div class="meal"><div class="mh"><span>'+m+'</span></div><div class="listcard">';
-      meals[m].forEach(function(o){var p=prod(o.e.id);if(!p)return;var ct=CATS[p.cat];
-        h+='<div class="row"><div class="ic" style="background:'+hexA(ct.c,.20)+'">'+ct.gl+'</div>'+
-           '<div style="flex:1"><div class="gname">'+esc(p.n)+'</div><div class="sub">'+(o.e.qty?o.e.qty+' шт':o.e.grams+' г')+' · '+Math.round(p.kcal*o.e.grams/100)+' ккал</div></div>'+
-           '<div class="heart" style="width:32px;height:32px;box-shadow:none;background:rgba(118,118,128,.12)" data-act="deldiary" data-i="'+o.i+'">✕</div></div>';
-      });
-      h+='</div></div>';
-    }
-    h+='<div style="height:10px"></div>';
-  }
-  return h;
-};
+
 renderOnb=function(){
   var o=$("onb");var f=S.onbForm;
   if(S.onbStep===0){
@@ -115,85 +84,7 @@ renderOnb=function(){
 };
 if($("onb")&&$("onb").style.display!=="none"){renderOnb();}
 
-
-
-renderDiary=function(){
-  var t=diaryTotals();var k=sweetBudget();var rem=k-t.kcal;
-  var pgoal=15;var pcur=t.p;var ppct=Math.min(Math.round(pcur/pgoal*100),100);
-  var h='<div class="lt">Дневник сладкого</div><div class="muted" style="padding:0 20px 4px">Сегодня · бюджет на сладкое и перекусы</div>';
-  h+='<div class="ringwrap">'+
-     '<div class="ring">'+ringSVG(t.kcal,k)+'<div class="ctr"><div class="big">'+(rem>=0?rem:0)+'</div><div class="sm">'+(rem>=0?"ккал осталось":"на сегодня всё")+'</div></div></div>'+
-     '<div class="macros">'+
-       '<div style="font-size:14px;font-weight:600">Бюджет на сладкое</div>'+
-       '<div style="font-size:13px;color:var(--label2)">Съедено '+t.kcal+' из '+k+' ккал</div>'+
-       '<div style="font-size:12px;color:var(--label3);line-height:1.45">≈20% дневной нормы ('+norm()+' ккал)<br>Б '+t.p+' · Ж '+t.f+' · У '+t.c+' г</div>'+
-     '</div></div>';
-  h+='<div style="margin:10px 16px;padding:14px 16px;border-radius:16px;background:var(--card2);border:1px solid var(--sep)">'+
-       '<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:15px;font-weight:700">💪 Белок из перекусов</div><div style="font-size:13px;color:var(--label2)">'+pcur+' / '+pgoal+' г</div></div>'+
-       '<div class="bar" style="margin:9px 0 7px"><i style="width:'+ppct+'%;background:var(--acc)"></i></div>'+
-       '<div style="font-size:12px;color:var(--label3);line-height:1.4">'+(pcur>=pgoal?'Цель по белку на сегодня закрыта ✓':'Протеиновые снэки НК помогают добрать белок без лишнего сахара')+'</div>'+
-       (pcur<pgoal?'<button class="btn sec" style="margin-top:11px" data-act2="proteinsnacks">Протеиновые снэки НК ›</button>':'')+
-     '</div>';
-  if(rem>=0){h+='<div style="padding:8px 16px"><button class="btn green" data-act="recommend">Подобрать перекус под остаток'+(rem>0?" ("+rem+" ккал)":"")+'</button></div>';}
-  else{h+='<div style="margin:10px 16px;padding:14px 16px;border-radius:16px;background:rgba(255,178,62,.12);border:1px solid rgba(255,178,62,.32)"><div style="font-size:15px;font-weight:700;color:#FFB23E">🍫 Сегодня вы порадовали себя!</div><div style="font-size:13px;color:var(--label2);margin:4px 0 0;line-height:1.45">Это нормально — завтра бюджет на сладкое обновится.</div></div>';}
-  if(!S.diary.length){
-    h+='<div class="empty"><span class="gl">🍬</span>Пока пусто.<br>Добавляйте сладости и перекусы — увидите, сколько ещё можно сегодня без вреда.</div>';
-  } else {
-    var meals={"Завтрак":[],"Обед":[],"Ужин":[],"Перекус":[]};
-    S.diary.forEach(function(e,i){(meals[e.meal]||meals["Перекус"]).push({e:e,i:i});});
-    for(var m in meals){
-      if(!meals[m].length)continue;
-      h+='<div class="meal"><div class="mh"><span>'+m+'</span></div><div class="listcard">';
-      meals[m].forEach(function(o){var p=prod(o.e.id);if(!p)return;var ct=CATS[p.cat];
-        h+='<div class="row"><div class="ic" style="background:'+hexA(ct.c,.20)+'">'+ct.gl+'</div>'+
-           '<div style="flex:1"><div class="gname">'+esc(p.n)+'</div><div class="sub">'+(o.e.qty?o.e.qty+' шт':o.e.grams+' г')+' · '+Math.round(p.kcal*o.e.grams/100)+' ккал</div></div>'+
-           '<div class="heart" style="width:32px;height:32px;box-shadow:none;background:rgba(118,118,128,.12)" data-act="deldiary" data-i="'+o.i+'">✕</div></div>';
-      });
-      h+='</div></div>';
-    }
-    h+='<div style="height:10px"></div>';
-  }
-  return h;
-};
-document.addEventListener("click",function(e){
-  if(e.target.closest('[data-act2="proteinsnacks"]')){if(typeof go==="function")go("category",{c:"Злаковые батончики"});}
-});
-
-
 function adjustDiary(i,delta){var e=S.diary[i];if(!e)return;var p=prod(e.id);var g=(p&&p.g)?p.g:(e.grams||1);var q=e.qty||Math.max(1,Math.round((e.grams||g)/g));q=Math.max(1,q+delta);e.qty=q;e.grams=q*g;save();render();}
-renderDiary=function(){
-  var t=diaryTotals();var k=sweetBudget();var rem=k-t.kcal;
-  var h='<div class="lt">Дневник сладкого</div><div class="muted" style="padding:0 20px 4px">Сегодня · бюджет на сладкое и перекусы</div>';
-  h+='<div class="ringwrap">'+
-     '<div class="ring">'+ringSVG(t.kcal,k)+'<div class="ctr"><div class="big">'+(rem>=0?rem:0)+'</div><div class="sm">'+(rem>=0?"ккал осталось":"на сегодня всё")+'</div></div></div>'+
-     '<div class="macros">'+
-       '<div style="font-size:14px;font-weight:600">Бюджет на сладкое</div>'+
-       '<div style="font-size:13px;color:var(--label2)">Съедено '+t.kcal+' из '+k+' ккал</div>'+
-       '<div style="font-size:12px;color:var(--label3);line-height:1.45">≈20% дневной нормы ('+norm()+' ккал)<br>Б '+t.p+' · Ж '+t.f+' · У '+t.c+' г</div>'+
-     '</div></div>';
-  if(rem>=0){h+='<div style="padding:8px 16px"><button class="btn green" data-act="recommend">Подобрать перекус под остаток'+(rem>0?" ("+rem+" ккал)":"")+'</button></div>';}
-  else{h+='<div style="margin:10px 16px;padding:14px 16px;border-radius:16px;background:rgba(255,178,62,.12);border:1px solid rgba(255,178,62,.32)"><div style="font-size:15px;font-weight:700;color:#FFB23E">🍫 Сегодня вы порадовали себя!</div><div style="font-size:13px;color:var(--label2);margin:4px 0 0;line-height:1.45">Это нормально — завтра бюджет на сладкое обновится.</div></div>';}
-  if(!S.diary.length){
-    h+='<div class="empty"><span class="gl">🍬</span>Пока пусто.<br>Добавляйте сладости и перекусы — увидите, сколько ещё можно сегодня без вреда.</div>';
-  } else {
-    var meals={"Завтрак":[],"Обед":[],"Ужин":[],"Перекус":[]};
-    S.diary.forEach(function(e,i){(meals[e.meal]||meals["Перекус"]).push({e:e,i:i});});
-    for(var m in meals){
-      if(!meals[m].length)continue;
-      h+='<div class="meal"><div class="mh"><span>'+m+'</span></div><div class="listcard">';
-      meals[m].forEach(function(o){var p=prod(o.e.id);if(!p)return;var ct=CATS[p.cat];
-        var qn=o.e.qty||Math.max(1,Math.round(o.e.grams/(p.g||o.e.grams||1)));
-        h+='<div class="row"><div class="ic" style="background:'+hexA(ct.c,.20)+'">'+ct.gl+'</div>'+
-           '<div style="flex:1;min-width:0"><div class="gname">'+esc(p.n)+'</div><div class="sub">'+Math.round(p.kcal*o.e.grams/100)+' ккал</div></div>'+
-           '<div class="qty" style="gap:11px;margin-right:4px"><button data-act="diarydec" data-i="'+o.i+'">−</button><b style="min-width:16px;text-align:center;font-size:16px">'+qn+'</b><button data-act="diaryinc" data-i="'+o.i+'">+</button></div>'+
-           '<div class="heart" style="width:30px;height:30px;box-shadow:none;background:rgba(118,118,128,.12)" data-act="deldiary" data-i="'+o.i+'">✕</div></div>';
-      });
-      h+='</div></div>';
-    }
-    h+='<div style="height:10px"></div>';
-  }
-  return h;
-};
 document.addEventListener("click",function(ev){
   var inc=ev.target.closest('[data-act="diaryinc"]');if(inc){adjustDiary(+inc.getAttribute("data-i"),1);return;}
   var dec=ev.target.closest('[data-act="diarydec"]');if(dec){adjustDiary(+dec.getAttribute("data-i"),-1);return;}

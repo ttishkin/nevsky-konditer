@@ -39,6 +39,7 @@ function seed() {
 module.exports = { seed };
 if (require.main === module) {
   seed();
-  const c = (t) => db.prepare("SELECT COUNT(*) c FROM " + t).get().c;
+  const tables = { categories: "categories", products: "products", users: "users" };
+  const c = (t) => db.prepare("SELECT COUNT(*) c FROM " + tables[t]).get().c;
   require("../utils/logger").info("Сидинг:", JSON.stringify({ categories: c("categories"), products: c("products"), users: c("users") }));
 }

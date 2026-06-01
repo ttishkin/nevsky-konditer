@@ -1,6 +1,4 @@
-/* js/services/nutrition.js
-   Сервис питания: нормы, КБЖУ, кольцо прогресса
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/services/nutrition.js — сервис питания: нормы, КБЖУ, кольцо прогресса */
 function norm(){
   if(S.profile&&S.profile.kcal)return S.profile.kcal;
   return 2000;

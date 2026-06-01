@@ -1,6 +1,4 @@
-/* js/core/render.js
-   Главный диспетчер render() и нижняя навигация
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/core/render.js — главный диспетчер render() и нижняя навигация */
 function render(){
   var top=S.stack[S.stack.length-1];
   var html;

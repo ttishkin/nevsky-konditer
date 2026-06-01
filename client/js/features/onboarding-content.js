@@ -1,6 +1,4 @@
-/* js/features/onboarding-content.js
-   Расширенный онбординг, дашборд, бонусы, о компании (v10-v11)
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/features/onboarding-content.js — расширенный онбординг, дашборд, бонусы, о компании */
 
 function odots(step){return '<div class="odots"><span class="'+(step>=1?"on":"")+'"></span><span class="'+(step>=2?"on":"")+'"></span></div>';}
 function goalCard(v,label,ic,cur){return '<button data-v="'+v+'" class="goalc'+(cur===v?" on":"")+'"><span class="gci">'+ic+'</span><span>'+label+'</span></button>';}

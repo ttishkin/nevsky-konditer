@@ -1,6 +1,4 @@
-/* js/features/stories-theme.js
-   Сторис, наборы, светлая/тёмная тема (v12-v13)
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/features/stories-theme.js — сторис, наборы, светлая/тёмная тема */
 
 var STORIES=[
  {t:"Скидки до −25%",s:"на любимое сладкое",g:"🏷️",bg:"linear-gradient(160deg,#FF375F,#7A1F4F)",ring:"linear-gradient(135deg,#FF375F,#FF9F0A)",act:"discounts"},

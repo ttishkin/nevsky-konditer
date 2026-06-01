@@ -1,6 +1,4 @@
-/* js/components/cards.js
-   UI-компоненты: иконки, превью, теги, фильтр, карточка товара
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/components/cards.js — UI-компоненты: иконки, превью, теги, фильтр, карточка товара */
 function icon(name,col){
   var c=col||"currentColor";var s='stroke="'+c+'" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"';
   var P0='<svg width="26" height="26" viewBox="0 0 24 24" '+s+'>';

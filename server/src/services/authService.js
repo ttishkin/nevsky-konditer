@@ -13,12 +13,13 @@ function calcKcal(p) {
 }
 exports.register = (body) => {
   requireFields(body, ["email", "password"]);
-  if (!isEmail(body.email)) throw bad("Некорректный email");
+  const email = String(body.email).trim().toLowerCase();
+  if (!isEmail(email)) throw bad("Некорректный email");
   if (String(body.password).length < 6) throw bad("Пароль не короче 6 символов");
-  if (userRepo.findByEmailRaw(body.email)) throw bad("Пользователь с таким email уже есть");
+  if (userRepo.findByEmailRaw(email)) throw bad("Пользователь с таким email уже есть");
   const kcalNorm = calcKcal(body);
   const user = userRepo.create({
-    email: body.email, passwordHash: hashPassword(body.password), name: body.name,
+    email, passwordHash: hashPassword(body.password), name: body.name,
     sex: body.sex, age: body.age, height: body.height, weight: body.weight,
     activity: body.activity, goal: body.goal, kcalNorm, points: 200, // приветственные баллы
   });
@@ -26,8 +27,8 @@ exports.register = (body) => {
 };
 exports.login = (body) => {
   requireFields(body, ["email", "password"]);
-  const raw = userRepo.findByEmailRaw(body.email);
-  if (!raw || !verifyPassword(body.password, raw.password_hash)) { const e = new Error("Неверный email или пароль"); e.status = 401; throw e; }
+  const raw = userRepo.findByEmailRaw(String(body.email).trim().toLowerCase());
+  if (!raw || !verifyPassword(body.password, raw.password_hash)) throw bad("Неверный email или пароль", 401);
   return { token: token.sign({ id: raw.id }), user: userRepo.findById(raw.id) };
 };
 exports.me = (user) => user;

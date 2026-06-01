@@ -1,6 +1,4 @@
-/* js/core/navigation.js
-   Навигация (go/back), обработчики ввода, инициализация
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/core/navigation.js — навигация (go/back), обработчики ввода, инициализация */
 function go(screen,extra){var top=S.stack[S.stack.length-1];if(top)top._st=$("app").scrollTop;S.stack.push(Object.assign({screen:screen},extra||{}));render();}
 function back(){S.stack.pop();render();}
 

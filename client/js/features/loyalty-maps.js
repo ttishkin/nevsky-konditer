@@ -1,6 +1,4 @@
-/* js/features/loyalty-maps.js
-   Лояльность, рефералка, FAQ, гид, карты (v14-v15)
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/features/loyalty-maps.js — лояльность, рефералка, FAQ, гид, карты */
 
 S.recent=S.recent||LS.get("nk_recent",[]);
 S.notifRead=(LS.get("nk_notifread","")==="1");

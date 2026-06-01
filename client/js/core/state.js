@@ -1,6 +1,4 @@
-/* js/core/state.js
-   Глобальное состояние приложения (S) и save()
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/core/state.js — глобальное состояние приложения (S) и save() */
 var S={
   tab:"catalog", stack:[], filter:"all", query:"",
   cart:LS.get("nk_cart",{}), fav:LS.get("nk_fav",[]),

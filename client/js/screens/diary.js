@@ -1,6 +1,4 @@
-/* js/screens/diary.js
-   Экраны дневника и рекомендаций
-   Проект «Невский Кондитер — ЗОЖ». Модуль подключается в порядке зависимостей (см. index.html). */
+/* js/screens/diary.js — экраны дневника и рекомендаций */
 function renderDiary(){
   var t=diaryTotals();var k=norm();var rem=k-t.kcal;var mt=macroTargets();
   var h='<div class="lt">Дневник</div><div class="muted" style="padding:0 20px 4px">Сегодня</div>';
