@@ -13,14 +13,27 @@ const apiRoutes = require("./routes");
 const openapi = require("./docs/openapi");
 
 const app = express();
-app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false, crossOriginResourcePolicy: false }));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
+  })
+);
 app.use(express.json({ limit: "64kb" }));
 app.use(cors);
 app.use(requestLogger);
 
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(openapi, { customSiteTitle: "Невский Кондитер API" }));
+app.use(
+  "/api/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(openapi, { customSiteTitle: "Невский Кондитер API" })
+);
 
-app.use("/api", rateLimit({ windowMs: 15 * 60 * 1000, max: 600, standardHeaders: true, legacyHeaders: false }));
+app.use(
+  "/api",
+  rateLimit({ windowMs: 15 * 60 * 1000, max: 600, standardHeaders: true, legacyHeaders: false })
+);
 
 app.use("/api", authOptional, apiRoutes);
 app.use("/api", notFound);

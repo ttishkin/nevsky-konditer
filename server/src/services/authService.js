@@ -19,16 +19,25 @@ exports.register = (body) => {
   if (userRepo.findByEmailRaw(email)) throw bad("Пользователь с таким email уже есть");
   const kcalNorm = calcKcal(body);
   const user = userRepo.create({
-    email, passwordHash: hashPassword(body.password), name: body.name,
-    sex: body.sex, age: body.age, height: body.height, weight: body.weight,
-    activity: body.activity, goal: body.goal, kcalNorm, points: 200, // приветственные баллы
+    email,
+    passwordHash: hashPassword(body.password),
+    name: body.name,
+    sex: body.sex,
+    age: body.age,
+    height: body.height,
+    weight: body.weight,
+    activity: body.activity,
+    goal: body.goal,
+    kcalNorm,
+    points: 200, // приветственные баллы
   });
   return { token: token.sign({ id: user.id }), user };
 };
 exports.login = (body) => {
   requireFields(body, ["email", "password"]);
   const raw = userRepo.findByEmailRaw(String(body.email).trim().toLowerCase());
-  if (!raw || !verifyPassword(body.password, raw.password_hash)) throw bad("Неверный email или пароль", 401);
+  if (!raw || !verifyPassword(body.password, raw.password_hash))
+    throw bad("Неверный email или пароль", 401);
   return { token: token.sign({ id: raw.id }), user: userRepo.findById(raw.id) };
 };
 exports.me = (user) => user;

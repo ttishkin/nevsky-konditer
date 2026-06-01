@@ -15,7 +15,8 @@ exports.userDetail = (id) => {
 };
 exports.sales = (days) => adminRepo.salesByDay(days);
 exports.setStatus = (id, status) => {
-  if (STATUSES.indexOf(status) < 0) throw bad("Недопустимый статус. Разрешено: " + STATUSES.join(", "));
+  if (STATUSES.indexOf(status) < 0)
+    throw bad("Недопустимый статус. Разрешено: " + STATUSES.join(", "));
   if (!adminRepo.getOrder(id)) throw bad("Заказ не найден", 404);
   adminRepo.setStatus(id, status);
   const order = adminRepo.getOrder(id);

@@ -1,181 +1,809 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Невский Кондитер — Админ-панель</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0E0F13;--card:#16181F;--card2:#1C1F28;--sep:rgba(255,255,255,.08);--label:#F2F3F5;--label2:#9AA0AC;--acc:#C7F94B;--accTx:#16240A}
-    body{background:var(--bg);color:var(--label);font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:24px;line-height:1.45}
-    .wrap{max-width:1150px;margin:0 auto}
-    h1{font-size:24px;margin-bottom:4px}
-    .muted{color:var(--label2);font-size:14px}
-    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-    .btn{background:var(--acc);color:var(--accTx);border:0;border-radius:11px;padding:11px 16px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit}
-    .btn.sec{background:rgba(255,255,255,.08);color:var(--label)}.btn:disabled{opacity:.4;cursor:default}
-    .lnk{color:var(--acc);cursor:pointer;text-decoration:underline;font-size:13px}
-    input,select{background:var(--card2);border:1px solid var(--sep);color:var(--label);border-radius:10px;padding:10px 12px;font-size:15px;font-family:inherit}
-    .card{background:var(--card);border:1px solid var(--sep);border-radius:16px;padding:18px;margin-top:16px}
-    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-    .stat{background:var(--card2);border-radius:12px;padding:14px}.stat .v{font-size:26px;font-weight:800;color:var(--acc)}.stat .l{font-size:13px;color:var(--label2)}
-    table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}
-    th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--sep);vertical-align:top}
-    th{color:var(--label2);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
-    .pill{display:inline-block;padding:3px 9px;border-radius:20px;font-size:12px;font-weight:600}
-    .s-new{background:rgba(94,92,230,.18);color:#9b99ff}.s-processing{background:rgba(255,159,10,.18);color:#ffb84d}
-    .s-shipped{background:rgba(48,176,199,.18);color:#5fd3e6}.s-delivered{background:rgba(52,199,89,.18);color:#5be37e}.s-cancelled{background:rgba(255,59,48,.18);color:#ff7a72}
-    .err{color:#ff7a72;font-size:14px;margin-top:8px}.hide{display:none}.items{color:var(--label2);font-size:13px}
-    .notif{padding:8px 0;border-bottom:1px solid var(--sep);font-size:13px}.notif .t{color:var(--label2);font-size:11px}
-    .ov{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
-    .modal{background:var(--card);border:1px solid var(--sep);border-radius:16px;max-width:560px;width:100%;padding:20px;max-height:88vh;overflow:auto}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <h1>Невский Кондитер — Админ-панель</h1>
-    <div class="muted">Управление заказами и пользователями · данные из базы</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Невский Кондитер — Админ-панель</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #0e0f13;
+        --card: #16181f;
+        --card2: #1c1f28;
+        --sep: rgba(255, 255, 255, 0.08);
+        --label: #f2f3f5;
+        --label2: #9aa0ac;
+        --acc: #c7f94b;
+        --accTx: #16240a;
+      }
+      body {
+        background: var(--bg);
+        color: var(--label);
+        font-family:
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        padding: 24px;
+        line-height: 1.45;
+      }
+      .wrap {
+        max-width: 1150px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 4px;
+      }
+      .muted {
+        color: var(--label2);
+        font-size: 14px;
+      }
+      .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .btn {
+        background: var(--acc);
+        color: var(--accTx);
+        border: 0;
+        border-radius: 11px;
+        padding: 11px 16px;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .btn.sec {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--label);
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      .lnk {
+        color: var(--acc);
+        cursor: pointer;
+        text-decoration: underline;
+        font-size: 13px;
+      }
+      input,
+      select {
+        background: var(--card2);
+        border: 1px solid var(--sep);
+        color: var(--label);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 15px;
+        font-family: inherit;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--sep);
+        border-radius: 16px;
+        padding: 18px;
+        margin-top: 16px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+      }
+      .stat {
+        background: var(--card2);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .stat .v {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--acc);
+      }
+      .stat .l {
+        font-size: 13px;
+        color: var(--label2);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        font-size: 14px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 10px 8px;
+        border-bottom: 1px solid var(--sep);
+        vertical-align: top;
+      }
+      th {
+        color: var(--label2);
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+      .pill {
+        display: inline-block;
+        padding: 3px 9px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .s-new {
+        background: rgba(94, 92, 230, 0.18);
+        color: #9b99ff;
+      }
+      .s-processing {
+        background: rgba(255, 159, 10, 0.18);
+        color: #ffb84d;
+      }
+      .s-shipped {
+        background: rgba(48, 176, 199, 0.18);
+        color: #5fd3e6;
+      }
+      .s-delivered {
+        background: rgba(52, 199, 89, 0.18);
+        color: #5be37e;
+      }
+      .s-cancelled {
+        background: rgba(255, 59, 48, 0.18);
+        color: #ff7a72;
+      }
+      .err {
+        color: #ff7a72;
+        font-size: 14px;
+        margin-top: 8px;
+      }
+      .hide {
+        display: none;
+      }
+      .items {
+        color: var(--label2);
+        font-size: 13px;
+      }
+      .notif {
+        padding: 8px 0;
+        border-bottom: 1px solid var(--sep);
+        font-size: 13px;
+      }
+      .notif .t {
+        color: var(--label2);
+        font-size: 11px;
+      }
+      .ov {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 50;
+      }
+      .modal {
+        background: var(--card);
+        border: 1px solid var(--sep);
+        border-radius: 16px;
+        max-width: 560px;
+        width: 100%;
+        padding: 20px;
+        max-height: 88vh;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Невский Кондитер — Админ-панель</h1>
+      <div class="muted">Управление заказами и пользователями · данные из базы</div>
 
-    <div class="card" id="loginCard">
-      <div style="font-weight:700;margin-bottom:12px">Вход для администратора</div>
-      <div class="row">
-        <input id="email" type="email" value="admin@nk.ru" style="flex:1;min-width:200px">
-        <input id="pass" type="password" value="admin1234" style="flex:1;min-width:160px">
-        <button class="btn" id="loginBtn">Войти</button>
-      </div>
-      <div class="err hide" id="loginErr"></div>
-      <div class="muted" style="margin-top:10px;font-size:13px">Демо-доступ: admin@nk.ru / admin1234</div>
-    </div>
-
-    <div id="dash" class="hide">
-      <div class="card">
-        <div class="row" style="justify-content:space-between">
-          <div style="font-weight:700">Сводка</div>
-          <div class="row"><button class="btn sec" id="refreshBtn">Обновить</button><button class="btn sec" id="logoutBtn">Выйти</button></div>
+      <div class="card" id="loginCard">
+        <div style="font-weight: 700; margin-bottom: 12px">Вход для администратора</div>
+        <div class="row">
+          <input id="email" type="email" value="admin@nk.ru" style="flex: 1; min-width: 200px" />
+          <input id="pass" type="password" value="admin1234" style="flex: 1; min-width: 160px" />
+          <button class="btn" id="loginBtn">Войти</button>
         </div>
-        <div class="stats" id="stats" style="margin-top:14px"></div>
-        <div style="font-weight:700;margin:18px 0 4px">Продажи по дням</div>
-        <div id="chart" class="muted">—</div>
+        <div class="err hide" id="loginErr"></div>
+        <div class="muted" style="margin-top: 10px; font-size: 13px">
+          Демо-доступ: admin@nk.ru / admin1234
+        </div>
       </div>
 
-      <div class="card">
-        <div class="row" style="justify-content:space-between;margin-bottom:6px">
-          <div style="font-weight:700">Заказы</div>
-          <div class="row">
-            <input id="search" placeholder="Поиск по № или email" style="min-width:200px">
-            <select id="statusFilter"><option value="">Все статусы</option><option value="new">Новые</option><option value="processing">В обработке</option><option value="shipped">Отправленные</option><option value="delivered">Доставленные</option><option value="cancelled">Отменённые</option></select>
-            <button class="btn sec" id="csvBtn">Скачать CSV</button>
+      <div id="dash" class="hide">
+        <div class="card">
+          <div class="row" style="justify-content: space-between">
+            <div style="font-weight: 700">Сводка</div>
+            <div class="row">
+              <button class="btn sec" id="refreshBtn">Обновить</button
+              ><button class="btn sec" id="logoutBtn">Выйти</button>
+            </div>
           </div>
+          <div class="stats" id="stats" style="margin-top: 14px"></div>
+          <div style="font-weight: 700; margin: 18px 0 4px">Продажи по дням</div>
+          <div id="chart" class="muted">—</div>
         </div>
-        <div class="muted" id="ordersCount" style="margin-bottom:4px"></div>
-        <div id="ordersWrap"><div class="muted">Загрузка…</div></div>
-        <div class="row" id="pager" style="justify-content:center;margin-top:14px"></div>
-      </div>
 
-      <div class="card">
-        <div style="font-weight:700;margin-bottom:6px">Пользователи</div>
-        <div id="usersWrap"><div class="muted">—</div></div>
-      </div>
+        <div class="card">
+          <div class="row" style="justify-content: space-between; margin-bottom: 6px">
+            <div style="font-weight: 700">Заказы</div>
+            <div class="row">
+              <input id="search" placeholder="Поиск по № или email" style="min-width: 200px" />
+              <select id="statusFilter">
+                <option value="">Все статусы</option>
+                <option value="new">Новые</option>
+                <option value="processing">В обработке</option>
+                <option value="shipped">Отправленные</option>
+                <option value="delivered">Доставленные</option>
+                <option value="cancelled">Отменённые</option>
+              </select>
+              <button class="btn sec" id="csvBtn">Скачать CSV</button>
+            </div>
+          </div>
+          <div class="muted" id="ordersCount" style="margin-bottom: 4px"></div>
+          <div id="ordersWrap"><div class="muted">Загрузка…</div></div>
+          <div class="row" id="pager" style="justify-content: center; margin-top: 14px"></div>
+        </div>
 
-      <div class="card">
-        <div style="font-weight:700;margin-bottom:4px">Уведомления (демо-почта)</div>
-        <div class="muted" style="font-size:12px;margin-bottom:8px">Письма покупателям при смене статуса (nodemailer; без SMTP — в лог сервера)</div>
-        <div id="notifs"><div class="muted">—</div></div>
+        <div class="card">
+          <div style="font-weight: 700; margin-bottom: 6px">Пользователи</div>
+          <div id="usersWrap"><div class="muted">—</div></div>
+        </div>
+
+        <div class="card">
+          <div style="font-weight: 700; margin-bottom: 4px">Уведомления (демо-почта)</div>
+          <div class="muted" style="font-size: 12px; margin-bottom: 8px">
+            Письма покупателям при смене статуса (nodemailer; без SMTP — в лог сервера)
+          </div>
+          <div id="notifs"><div class="muted">—</div></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="modalHost"></div>
+    <div id="modalHost"></div>
 
-  <script>
-    var API=(location.protocol==="http:"||location.protocol==="https:")?"":"http://localhost:3000";
-    var token=null, ALL=[], PAGE=1, PAGE_SIZE=10;
-    var STATUSES=["new","processing","shipped","delivered","cancelled"];
-    var LABELS={new:"Новый",processing:"В обработке",shipped:"Отправлен",delivered:"Доставлен",cancelled:"Отменён"};
-    var $=function(id){return document.getElementById(id);};
-    function authHeaders(extra){var h=extra||{};if(token)h["Authorization"]="Bearer "+token;return h;}
-    function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
-    function fmtDate(iso){try{return new Date(iso).toLocaleString("ru-RU");}catch(e){return iso;}}
-    function get(path){return fetch(API+path,{headers:authHeaders()}).then(function(r){return r.json();});}
-
-    $("loginBtn").onclick=function(){
-      $("loginErr").classList.add("hide");
-      fetch(API+"/api/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:$("email").value.trim(),password:$("pass").value})})
-        .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||"Ошибка");return j;});})
-        .then(function(d){if(!d.user||d.user.role!=="admin")throw new Error("Этот аккаунт не администратор");token=d.token;$("loginCard").classList.add("hide");$("dash").classList.remove("hide");load();})
-        .catch(function(e){$("loginErr").textContent=e.message;$("loginErr").classList.remove("hide");});
-    };
-    $("logoutBtn").onclick=function(){token=null;$("dash").classList.add("hide");$("loginCard").classList.remove("hide");};
-    $("refreshBtn").onclick=load;
-    $("search").oninput=function(){PAGE=1;renderTable();};
-    $("statusFilter").onchange=function(){PAGE=1;renderTable();};
-    $("csvBtn").onclick=function(){downloadCSV(filtered());};
-
-    function load(){loadStats();loadChart();loadOrders();loadUsers();loadNotifications();}
-    function loadStats(){get("/api/admin/stats").then(function(s){var by={};(s.byStatus||[]).forEach(function(x){by[x.status]=x.c;});$("stats").innerHTML=stat(s.orders,"Заказов")+stat(s.revenue+" ₽","Выручка")+stat(s.users,"Пользователей")+stat(s.products,"Товаров")+stat((by.new||0),"Новых")+stat((by.delivered||0),"Доставлено");}).catch(function(){});}
-    function stat(v,l){return '<div class="stat"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>';}
-
-    function loadChart(){
-      get("/api/admin/sales?days=14").then(function(data){
-        if(!data||!data.length){$("chart").innerHTML='<div class="muted">Нет данных о продажах.</div>';return;}
-        var W=Math.max(320, data.length*60), H=170, pad=28, max=Math.max.apply(null,data.map(function(d){return d.revenue;}))||1;
-        var bw=Math.min(46,(W-pad)/data.length-10), svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="max-width:'+W+'px">';
-        data.forEach(function(d,i){
-          var x=pad+i*((W-pad)/data.length), h=Math.round((H-pad*1.4)*(d.revenue/max)), y=H-pad-h;
-          var dd=d.day.slice(8,10)+"."+d.day.slice(5,7);
-          svg+='<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+Math.max(2,h)+'" rx="4" fill="#C7F94B"></rect>';
-          svg+='<text x="'+(x+bw/2)+'" y="'+(y-5)+'" fill="#9AA0AC" font-size="11" text-anchor="middle">'+d.revenue+'</text>';
-          svg+='<text x="'+(x+bw/2)+'" y="'+(H-8)+'" fill="#9AA0AC" font-size="11" text-anchor="middle">'+dd+'</text>';
+    <script>
+      var API =
+        location.protocol === "http:" || location.protocol === "https:"
+          ? ""
+          : "http://localhost:3000";
+      var token = null,
+        ALL = [],
+        PAGE = 1,
+        PAGE_SIZE = 10;
+      var STATUSES = ["new", "processing", "shipped", "delivered", "cancelled"];
+      var LABELS = {
+        new: "Новый",
+        processing: "В обработке",
+        shipped: "Отправлен",
+        delivered: "Доставлен",
+        cancelled: "Отменён",
+      };
+      var $ = function (id) {
+        return document.getElementById(id);
+      };
+      function authHeaders(extra) {
+        var h = extra || {};
+        if (token) h["Authorization"] = "Bearer " + token;
+        return h;
+      }
+      function esc(s) {
+        return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
         });
-        $("chart").innerHTML=svg+'</svg>';
-      }).catch(function(){});
-    }
+      }
+      function fmtDate(iso) {
+        try {
+          return new Date(iso).toLocaleString("ru-RU");
+        } catch (e) {
+          return iso;
+        }
+      }
+      function get(path) {
+        return fetch(API + path, { headers: authHeaders() }).then(function (r) {
+          return r.json();
+        });
+      }
 
-    function loadNotifications(){get("/api/admin/notifications").then(function(list){if(!list.length){$("notifs").innerHTML='<div class="muted">Пока нет уведомлений.</div>';return;}$("notifs").innerHTML=list.slice(0,8).map(function(n){return '<div class="notif"><div>→ '+esc(n.email||"гость")+': '+esc(n.message)+'</div><div class="t">'+fmtDate(n.createdAt)+'</div></div>';}).join("");}).catch(function(){});}
+      $("loginBtn").onclick = function () {
+        $("loginErr").classList.add("hide");
+        fetch(API + "/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: $("email").value.trim(), password: $("pass").value }),
+        })
+          .then(function (r) {
+            return r.json().then(function (j) {
+              if (!r.ok) throw new Error(j.error || "Ошибка");
+              return j;
+            });
+          })
+          .then(function (d) {
+            if (!d.user || d.user.role !== "admin")
+              throw new Error("Этот аккаунт не администратор");
+            token = d.token;
+            $("loginCard").classList.add("hide");
+            $("dash").classList.remove("hide");
+            load();
+          })
+          .catch(function (e) {
+            $("loginErr").textContent = e.message;
+            $("loginErr").classList.remove("hide");
+          });
+      };
+      $("logoutBtn").onclick = function () {
+        token = null;
+        $("dash").classList.add("hide");
+        $("loginCard").classList.remove("hide");
+      };
+      $("refreshBtn").onclick = load;
+      $("search").oninput = function () {
+        PAGE = 1;
+        renderTable();
+      };
+      $("statusFilter").onchange = function () {
+        PAGE = 1;
+        renderTable();
+      };
+      $("csvBtn").onclick = function () {
+        downloadCSV(filtered());
+      };
 
-    function loadUsers(){
-      get("/api/admin/users").then(function(list){
-        if(!list.length){$("usersWrap").innerHTML='<div class="muted">Нет пользователей.</div>';return;}
-        var html='<table><thead><tr><th>Email</th><th>Имя</th><th>Роль</th><th>Баллы</th><th>Заказов</th><th></th></tr></thead><tbody>';
-        list.forEach(function(u){html+='<tr><td>'+esc(u.email)+'</td><td>'+esc(u.name||"—")+'</td><td>'+(u.role==="admin"?'<span class="pill s-shipped">админ</span>':"клиент")+'</td><td>'+u.points+'</td><td>'+u.ordersCount+'</td><td><span class="lnk userDet" data-id="'+u.id+'">Подробнее</span></td></tr>';});
-        $("usersWrap").innerHTML=html+'</tbody></table>';
-        Array.prototype.forEach.call(document.querySelectorAll(".userDet"),function(el){el.onclick=function(){openUser(+el.getAttribute("data-id"));};});
-      }).catch(function(){});
-    }
-    function openUser(id){
-      get("/api/admin/users/"+id).then(function(d){
-        var u=d.user, orders=d.orders||[];
-        var ord=orders.length?('<table><thead><tr><th>Заказ</th><th>Дата</th><th>Сумма</th><th>Статус</th></tr></thead><tbody>'+orders.map(function(o){return '<tr><td><b>'+esc(o.no)+'</b></td><td class="muted">'+fmtDate(o.created_at)+'</td><td>'+o.total+' ₽</td><td><span class="pill s-'+o.status+'">'+(LABELS[o.status]||o.status)+'</span></td></tr>';}).join("")+'</tbody></table>'):'<div class="muted">Заказов нет.</div>';
-        var html='<div class="ov" id="ovBg"><div class="modal"><div class="row" style="justify-content:space-between"><div style="font-size:18px;font-weight:800">'+esc(u.name||u.email)+'</div><button class="btn sec" id="closeM">✕</button></div>'+
-          '<div class="muted" style="margin:4px 0 12px">'+esc(u.email)+' · '+(u.role==="admin"?"администратор":"клиент")+' · баллы: '+u.points+(u.kcalNorm?(' · норма '+u.kcalNorm+' ккал'):"")+'</div>'+
-          '<div style="font-weight:700;margin-bottom:4px">Заказы ('+orders.length+')</div>'+ord+'</div></div>';
-        $("modalHost").innerHTML=html;$("closeM").onclick=function(){$("modalHost").innerHTML="";};$("ovBg").onclick=function(e){if(e.target===$("ovBg"))$("modalHost").innerHTML="";};
-      }).catch(function(){});
-    }
+      function load() {
+        loadStats();
+        loadChart();
+        loadOrders();
+        loadUsers();
+        loadNotifications();
+      }
+      function loadStats() {
+        get("/api/admin/stats")
+          .then(function (s) {
+            var by = {};
+            (s.byStatus || []).forEach(function (x) {
+              by[x.status] = x.c;
+            });
+            $("stats").innerHTML =
+              stat(s.orders, "Заказов") +
+              stat(s.revenue + " ₽", "Выручка") +
+              stat(s.users, "Пользователей") +
+              stat(s.products, "Товаров") +
+              stat(by.new || 0, "Новых") +
+              stat(by.delivered || 0, "Доставлено");
+          })
+          .catch(function () {});
+      }
+      function stat(v, l) {
+        return (
+          '<div class="stat"><div class="v">' + v + '</div><div class="l">' + l + "</div></div>"
+        );
+      }
 
-    function loadOrders(){get("/api/admin/orders").then(function(orders){ALL=orders||[];renderTable();}).catch(function(){$("ordersWrap").innerHTML='<div class="err">Не удалось загрузить заказы.</div>';});}
-    function filtered(){var q=($("search").value||"").trim().toLowerCase(),st=$("statusFilter").value;return ALL.filter(function(o){if(st&&o.status!==st)return false;if(q){var hay=((o.no||"")+" "+(o.userEmail||"")).toLowerCase();if(hay.indexOf(q)<0)return false;}return true;});}
-    function renderTable(){
-      var list=filtered(),pages=Math.max(1,Math.ceil(list.length/PAGE_SIZE));if(PAGE>pages)PAGE=pages;
-      var pageList=list.slice((PAGE-1)*PAGE_SIZE,PAGE*PAGE_SIZE);
-      $("ordersCount").textContent="Показано: "+pageList.length+" (по фильтру "+list.length+" из "+ALL.length+")";
-      if(!list.length){$("ordersWrap").innerHTML='<div class="muted">Ничего не найдено.</div>';$("pager").innerHTML="";return;}
-      var html='<table><thead><tr><th>Заказ</th><th>Дата</th><th>Покупатель</th><th>Состав</th><th>Сумма</th><th>Статус</th><th></th></tr></thead><tbody>';
-      pageList.forEach(function(o){var items=(o.items||[]).map(function(i){return esc(i.name||("#"+i.productId))+" ×"+i.qty;}).join(", ");var sel='<select data-id="'+o.id+'" class="statusSel">'+STATUSES.map(function(s){return '<option value="'+s+'"'+(s===o.status?" selected":"")+'>'+LABELS[s]+'</option>';}).join("")+'</select>';html+='<tr><td><b>'+esc(o.no)+'</b></td><td class="muted">'+fmtDate(o.created_at)+'</td><td>'+esc(o.userEmail||"гость")+'</td><td class="items">'+items+'</td><td><b>'+o.total+' ₽</b></td><td><span class="pill s-'+o.status+'">'+(LABELS[o.status]||o.status)+'</span><br>'+sel+'</td><td><span class="lnk det" data-id="'+o.id+'">Подробнее</span></td></tr>';});
-      $("ordersWrap").innerHTML=html+'</tbody></table>';
-      Array.prototype.forEach.call(document.querySelectorAll(".statusSel"),function(sel){sel.onchange=function(){fetch(API+"/api/admin/orders/"+sel.getAttribute("data-id")+"/status",{method:"PATCH",headers:authHeaders({"Content-Type":"application/json"}),body:JSON.stringify({status:sel.value})}).then(function(r){return r.json();}).then(function(){load();}).catch(function(){});};});
-      Array.prototype.forEach.call(document.querySelectorAll(".det"),function(el){el.onclick=function(){openDetail(+el.getAttribute("data-id"));};});
-      if(pages>1){$("pager").innerHTML='<button class="btn sec" id="prevP"'+(PAGE<=1?" disabled":"")+'>← Назад</button><span class="muted">стр. '+PAGE+' из '+pages+'</span><button class="btn sec" id="nextP"'+(PAGE>=pages?" disabled":"")+'>Вперёд →</button>';if($("prevP"))$("prevP").onclick=function(){if(PAGE>1){PAGE--;renderTable();}};if($("nextP"))$("nextP").onclick=function(){if(PAGE<pages){PAGE++;renderTable();}};}else{$("pager").innerHTML="";}
-    }
-    function openDetail(id){
-      var o=ALL.filter(function(x){return x.id===id;})[0];if(!o)return;
-      var rows=(o.items||[]).map(function(i){return '<tr><td>'+esc(i.name||("#"+i.productId))+'</td><td>×'+i.qty+'</td><td>'+i.price+' ₽</td><td>'+(i.price*i.qty)+' ₽</td></tr>';}).join("");
-      var sub=(o.items||[]).reduce(function(s,i){return s+i.price*i.qty;},0);
-      var html='<div class="ov" id="ovBg"><div class="modal"><div class="row" style="justify-content:space-between"><div style="font-size:18px;font-weight:800">Заказ '+esc(o.no)+'</div><button class="btn sec" id="closeM">✕</button></div><div class="muted" style="margin:4px 0 12px">'+fmtDate(o.created_at)+' · '+esc(o.userEmail||"гость")+' · <span class="pill s-'+o.status+'">'+(LABELS[o.status]||o.status)+'</span></div><table><thead><tr><th>Товар</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr></thead><tbody>'+rows+'</tbody></table><div style="margin-top:12px;font-size:14px;line-height:1.8">Товары: <b>'+sub+' ₽</b><br>Доставка: <b>'+o.delivery+' ₽</b>'+(o.promo_code?'<br>Промокод: <b>'+esc(o.promo_code)+'</b>':'')+'<br>Списано баллами: <b>'+o.bonus_spent+'</b> · Начислено: <b>'+o.bonus_earned+'</b><br><span style="font-size:17px">Итого: <b style="color:var(--acc)">'+o.total+' ₽</b></span></div></div></div>';
-      $("modalHost").innerHTML=html;$("closeM").onclick=function(){$("modalHost").innerHTML="";};$("ovBg").onclick=function(e){if(e.target===$("ovBg"))$("modalHost").innerHTML="";};
-    }
-    function buildCSV(list){var rows=[["Номер","Дата","Покупатель","Состав","Сумма","Статус"]];list.forEach(function(o){var items=(o.items||[]).map(function(i){return (i.name||("#"+i.productId))+" x"+i.qty;}).join("; ");rows.push([o.no,fmtDate(o.created_at),o.userEmail||"гость",items,o.total,LABELS[o.status]||o.status]);});return "﻿"+rows.map(function(r){return r.map(function(c){return '"'+String(c==null?"":c).replace(/"/g,'""')+'"';}).join(";");}).join("\r\n");}
-    window.buildCSV=buildCSV;
-    function downloadCSV(list){try{var blob=new Blob([buildCSV(list)],{type:"text/csv;charset=utf-8"});var url=URL.createObjectURL(blob);var a=document.createElement("a");a.href=url;a.download="orders_"+new Date().toISOString().slice(0,10)+".csv";document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},500);}catch(e){alert("Не удалось сформировать CSV");}}
-  </script>
-</body>
+      function loadChart() {
+        get("/api/admin/sales?days=14")
+          .then(function (data) {
+            if (!data || !data.length) {
+              $("chart").innerHTML = '<div class="muted">Нет данных о продажах.</div>';
+              return;
+            }
+            var W = Math.max(320, data.length * 60),
+              H = 170,
+              pad = 28,
+              max =
+                Math.max.apply(
+                  null,
+                  data.map(function (d) {
+                    return d.revenue;
+                  })
+                ) || 1;
+            var bw = Math.min(46, (W - pad) / data.length - 10),
+              svg =
+                '<svg viewBox="0 0 ' +
+                W +
+                " " +
+                H +
+                '" width="100%" style="max-width:' +
+                W +
+                'px">';
+            data.forEach(function (d, i) {
+              var x = pad + i * ((W - pad) / data.length),
+                h = Math.round((H - pad * 1.4) * (d.revenue / max)),
+                y = H - pad - h;
+              var dd = d.day.slice(8, 10) + "." + d.day.slice(5, 7);
+              svg +=
+                '<rect x="' +
+                x +
+                '" y="' +
+                y +
+                '" width="' +
+                bw +
+                '" height="' +
+                Math.max(2, h) +
+                '" rx="4" fill="#C7F94B"></rect>';
+              svg +=
+                '<text x="' +
+                (x + bw / 2) +
+                '" y="' +
+                (y - 5) +
+                '" fill="#9AA0AC" font-size="11" text-anchor="middle">' +
+                d.revenue +
+                "</text>";
+              svg +=
+                '<text x="' +
+                (x + bw / 2) +
+                '" y="' +
+                (H - 8) +
+                '" fill="#9AA0AC" font-size="11" text-anchor="middle">' +
+                dd +
+                "</text>";
+            });
+            $("chart").innerHTML = svg + "</svg>";
+          })
+          .catch(function () {});
+      }
+
+      function loadNotifications() {
+        get("/api/admin/notifications")
+          .then(function (list) {
+            if (!list.length) {
+              $("notifs").innerHTML = '<div class="muted">Пока нет уведомлений.</div>';
+              return;
+            }
+            $("notifs").innerHTML = list
+              .slice(0, 8)
+              .map(function (n) {
+                return (
+                  '<div class="notif"><div>→ ' +
+                  esc(n.email || "гость") +
+                  ": " +
+                  esc(n.message) +
+                  '</div><div class="t">' +
+                  fmtDate(n.createdAt) +
+                  "</div></div>"
+                );
+              })
+              .join("");
+          })
+          .catch(function () {});
+      }
+
+      function loadUsers() {
+        get("/api/admin/users")
+          .then(function (list) {
+            if (!list.length) {
+              $("usersWrap").innerHTML = '<div class="muted">Нет пользователей.</div>';
+              return;
+            }
+            var html =
+              "<table><thead><tr><th>Email</th><th>Имя</th><th>Роль</th><th>Баллы</th><th>Заказов</th><th></th></tr></thead><tbody>";
+            list.forEach(function (u) {
+              html +=
+                "<tr><td>" +
+                esc(u.email) +
+                "</td><td>" +
+                esc(u.name || "—") +
+                "</td><td>" +
+                (u.role === "admin" ? '<span class="pill s-shipped">админ</span>' : "клиент") +
+                "</td><td>" +
+                u.points +
+                "</td><td>" +
+                u.ordersCount +
+                '</td><td><span class="lnk userDet" data-id="' +
+                u.id +
+                '">Подробнее</span></td></tr>';
+            });
+            $("usersWrap").innerHTML = html + "</tbody></table>";
+            Array.prototype.forEach.call(document.querySelectorAll(".userDet"), function (el) {
+              el.onclick = function () {
+                openUser(+el.getAttribute("data-id"));
+              };
+            });
+          })
+          .catch(function () {});
+      }
+      function openUser(id) {
+        get("/api/admin/users/" + id)
+          .then(function (d) {
+            var u = d.user,
+              orders = d.orders || [];
+            var ord = orders.length
+              ? "<table><thead><tr><th>Заказ</th><th>Дата</th><th>Сумма</th><th>Статус</th></tr></thead><tbody>" +
+                orders
+                  .map(function (o) {
+                    return (
+                      "<tr><td><b>" +
+                      esc(o.no) +
+                      '</b></td><td class="muted">' +
+                      fmtDate(o.created_at) +
+                      "</td><td>" +
+                      o.total +
+                      ' ₽</td><td><span class="pill s-' +
+                      o.status +
+                      '">' +
+                      (LABELS[o.status] || o.status) +
+                      "</span></td></tr>"
+                    );
+                  })
+                  .join("") +
+                "</tbody></table>"
+              : '<div class="muted">Заказов нет.</div>';
+            var html =
+              '<div class="ov" id="ovBg"><div class="modal"><div class="row" style="justify-content:space-between"><div style="font-size:18px;font-weight:800">' +
+              esc(u.name || u.email) +
+              '</div><button class="btn sec" id="closeM">✕</button></div>' +
+              '<div class="muted" style="margin:4px 0 12px">' +
+              esc(u.email) +
+              " · " +
+              (u.role === "admin" ? "администратор" : "клиент") +
+              " · баллы: " +
+              u.points +
+              (u.kcalNorm ? " · норма " + u.kcalNorm + " ккал" : "") +
+              "</div>" +
+              '<div style="font-weight:700;margin-bottom:4px">Заказы (' +
+              orders.length +
+              ")</div>" +
+              ord +
+              "</div></div>";
+            $("modalHost").innerHTML = html;
+            $("closeM").onclick = function () {
+              $("modalHost").innerHTML = "";
+            };
+            $("ovBg").onclick = function (e) {
+              if (e.target === $("ovBg")) $("modalHost").innerHTML = "";
+            };
+          })
+          .catch(function () {});
+      }
+
+      function loadOrders() {
+        get("/api/admin/orders")
+          .then(function (orders) {
+            ALL = orders || [];
+            renderTable();
+          })
+          .catch(function () {
+            $("ordersWrap").innerHTML = '<div class="err">Не удалось загрузить заказы.</div>';
+          });
+      }
+      function filtered() {
+        var q = ($("search").value || "").trim().toLowerCase(),
+          st = $("statusFilter").value;
+        return ALL.filter(function (o) {
+          if (st && o.status !== st) return false;
+          if (q) {
+            var hay = ((o.no || "") + " " + (o.userEmail || "")).toLowerCase();
+            if (hay.indexOf(q) < 0) return false;
+          }
+          return true;
+        });
+      }
+      function renderTable() {
+        var list = filtered(),
+          pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+        if (PAGE > pages) PAGE = pages;
+        var pageList = list.slice((PAGE - 1) * PAGE_SIZE, PAGE * PAGE_SIZE);
+        $("ordersCount").textContent =
+          "Показано: " +
+          pageList.length +
+          " (по фильтру " +
+          list.length +
+          " из " +
+          ALL.length +
+          ")";
+        if (!list.length) {
+          $("ordersWrap").innerHTML = '<div class="muted">Ничего не найдено.</div>';
+          $("pager").innerHTML = "";
+          return;
+        }
+        var html =
+          "<table><thead><tr><th>Заказ</th><th>Дата</th><th>Покупатель</th><th>Состав</th><th>Сумма</th><th>Статус</th><th></th></tr></thead><tbody>";
+        pageList.forEach(function (o) {
+          var items = (o.items || [])
+            .map(function (i) {
+              return esc(i.name || "#" + i.productId) + " ×" + i.qty;
+            })
+            .join(", ");
+          var sel =
+            '<select data-id="' +
+            o.id +
+            '" class="statusSel">' +
+            STATUSES.map(function (s) {
+              return (
+                '<option value="' +
+                s +
+                '"' +
+                (s === o.status ? " selected" : "") +
+                ">" +
+                LABELS[s] +
+                "</option>"
+              );
+            }).join("") +
+            "</select>";
+          html +=
+            "<tr><td><b>" +
+            esc(o.no) +
+            '</b></td><td class="muted">' +
+            fmtDate(o.created_at) +
+            "</td><td>" +
+            esc(o.userEmail || "гость") +
+            '</td><td class="items">' +
+            items +
+            "</td><td><b>" +
+            o.total +
+            ' ₽</b></td><td><span class="pill s-' +
+            o.status +
+            '">' +
+            (LABELS[o.status] || o.status) +
+            "</span><br>" +
+            sel +
+            '</td><td><span class="lnk det" data-id="' +
+            o.id +
+            '">Подробнее</span></td></tr>';
+        });
+        $("ordersWrap").innerHTML = html + "</tbody></table>";
+        Array.prototype.forEach.call(document.querySelectorAll(".statusSel"), function (sel) {
+          sel.onchange = function () {
+            fetch(API + "/api/admin/orders/" + sel.getAttribute("data-id") + "/status", {
+              method: "PATCH",
+              headers: authHeaders({ "Content-Type": "application/json" }),
+              body: JSON.stringify({ status: sel.value }),
+            })
+              .then(function (r) {
+                return r.json();
+              })
+              .then(function () {
+                load();
+              })
+              .catch(function () {});
+          };
+        });
+        Array.prototype.forEach.call(document.querySelectorAll(".det"), function (el) {
+          el.onclick = function () {
+            openDetail(+el.getAttribute("data-id"));
+          };
+        });
+        if (pages > 1) {
+          $("pager").innerHTML =
+            '<button class="btn sec" id="prevP"' +
+            (PAGE <= 1 ? " disabled" : "") +
+            '>← Назад</button><span class="muted">стр. ' +
+            PAGE +
+            " из " +
+            pages +
+            '</span><button class="btn sec" id="nextP"' +
+            (PAGE >= pages ? " disabled" : "") +
+            ">Вперёд →</button>";
+          if ($("prevP"))
+            $("prevP").onclick = function () {
+              if (PAGE > 1) {
+                PAGE--;
+                renderTable();
+              }
+            };
+          if ($("nextP"))
+            $("nextP").onclick = function () {
+              if (PAGE < pages) {
+                PAGE++;
+                renderTable();
+              }
+            };
+        } else {
+          $("pager").innerHTML = "";
+        }
+      }
+      function openDetail(id) {
+        var o = ALL.filter(function (x) {
+          return x.id === id;
+        })[0];
+        if (!o) return;
+        var rows = (o.items || [])
+          .map(function (i) {
+            return (
+              "<tr><td>" +
+              esc(i.name || "#" + i.productId) +
+              "</td><td>×" +
+              i.qty +
+              "</td><td>" +
+              i.price +
+              " ₽</td><td>" +
+              i.price * i.qty +
+              " ₽</td></tr>"
+            );
+          })
+          .join("");
+        var sub = (o.items || []).reduce(function (s, i) {
+          return s + i.price * i.qty;
+        }, 0);
+        var html =
+          '<div class="ov" id="ovBg"><div class="modal"><div class="row" style="justify-content:space-between"><div style="font-size:18px;font-weight:800">Заказ ' +
+          esc(o.no) +
+          '</div><button class="btn sec" id="closeM">✕</button></div><div class="muted" style="margin:4px 0 12px">' +
+          fmtDate(o.created_at) +
+          " · " +
+          esc(o.userEmail || "гость") +
+          ' · <span class="pill s-' +
+          o.status +
+          '">' +
+          (LABELS[o.status] || o.status) +
+          "</span></div><table><thead><tr><th>Товар</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr></thead><tbody>" +
+          rows +
+          '</tbody></table><div style="margin-top:12px;font-size:14px;line-height:1.8">Товары: <b>' +
+          sub +
+          " ₽</b><br>Доставка: <b>" +
+          o.delivery +
+          " ₽</b>" +
+          (o.promo_code ? "<br>Промокод: <b>" + esc(o.promo_code) + "</b>" : "") +
+          "<br>Списано баллами: <b>" +
+          o.bonus_spent +
+          "</b> · Начислено: <b>" +
+          o.bonus_earned +
+          '</b><br><span style="font-size:17px">Итого: <b style="color:var(--acc)">' +
+          o.total +
+          " ₽</b></span></div></div></div>";
+        $("modalHost").innerHTML = html;
+        $("closeM").onclick = function () {
+          $("modalHost").innerHTML = "";
+        };
+        $("ovBg").onclick = function (e) {
+          if (e.target === $("ovBg")) $("modalHost").innerHTML = "";
+        };
+      }
+      function buildCSV(list) {
+        var rows = [["Номер", "Дата", "Покупатель", "Состав", "Сумма", "Статус"]];
+        list.forEach(function (o) {
+          var items = (o.items || [])
+            .map(function (i) {
+              return (i.name || "#" + i.productId) + " x" + i.qty;
+            })
+            .join("; ");
+          rows.push([
+            o.no,
+            fmtDate(o.created_at),
+            o.userEmail || "гость",
+            items,
+            o.total,
+            LABELS[o.status] || o.status,
+          ]);
+        });
+        return (
+          "﻿" +
+          rows
+            .map(function (r) {
+              return r
+                .map(function (c) {
+                  return '"' + String(c == null ? "" : c).replace(/"/g, '""') + '"';
+                })
+                .join(";");
+            })
+            .join("\r\n")
+        );
+      }
+      window.buildCSV = buildCSV;
+      function downloadCSV(list) {
+        try {
+          var blob = new Blob([buildCSV(list)], { type: "text/csv;charset=utf-8" });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "orders_" + new Date().toISOString().slice(0, 10) + ".csv";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function () {
+            URL.revokeObjectURL(url);
+          }, 500);
+        } catch (e) {
+          alert("Не удалось сформировать CSV");
+        }
+      }
+    </script>
+  </body>
 </html>
