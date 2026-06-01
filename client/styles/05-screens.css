@@ -16,7 +16,6 @@
   .bnrs{display:flex;gap:12px;overflow-x:auto;padding:4px 16px 12px;scroll-snap-type:x proximity}
   .bnrs::-webkit-scrollbar{display:none}
   .bnr{flex:none;width:282px;border-radius:18px;padding:18px;color:#fff;cursor:pointer;scroll-snap-align:start}
-  @media (min-width:768px){.bnrs{flex-wrap:wrap;padding-left:4px;padding-right:4px}.bnr{flex:1;min-width:240px}}
   .bnr .bt{font-size:20px;font-weight:800}
   .bnr .bs{font-size:13px;opacity:.92;margin-top:3px}
   .bnr .bcta{margin-top:14px;font-size:13px;font-weight:700;background:rgba(255,255,255,.18);display:inline-block;padding:5px 12px;border-radius:14px}

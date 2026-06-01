@@ -9,7 +9,9 @@
       "Bash(npm test:*)",
       "Bash(npm install:*)",
       "Bash(timeout 5 node --no-warnings server/server.js)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill:*)"
     ]
   }
 }
