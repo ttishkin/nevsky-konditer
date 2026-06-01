@@ -7,15 +7,11 @@
     --green:#34C759;--pink:#FF375F;--orange:#FF9F0A;
     --r:18px;--r2:13px;--nkA:#8B7BFF;--nkB:#5E5CE6;
   }
-  html,body{height:100%}
-  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#000;color:var(--label);display:flex;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
-  #frame{position:relative;width:402px;height:858px;background:var(--bg);border-radius:46px;overflow:hidden;border:11px solid #000;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+  html,body{height:100%;margin:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--label);-webkit-font-smoothing:antialiased}
+  #frame{position:relative;width:100%;height:100vh;height:100dvh;background:var(--bg);overflow:hidden}
   #screen{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
-  #app{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:96px}
-  @media (max-width:520px){body{display:block}#frame{width:100vw;height:100vh;height:100dvh;border:0;border-radius:0;box-shadow:none}}
-  .statusbar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 22px 0 26px;font-weight:600;font-size:15px;color:var(--label);flex:none}
-  .statusbar .icons{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--label2)}
-  @media (max-width:520px){.statusbar{height:env(safe-area-inset-top,20px);padding:0}.statusbar *{display:none}}
+  #app{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:96px;padding-top:env(safe-area-inset-top,0)}
 
   .lt{font-size:32px;font-weight:800;letter-spacing:-.5px;padding:6px 20px 10px;color:var(--label)}
   .navbar{display:flex;align-items:center;gap:10px;padding:8px 16px 6px;min-height:44px}
@@ -38,4 +34,5 @@
 
   .hscroll{display:flex;gap:14px;overflow-x:auto;padding:6px 16px 14px;scrollbar-width:none}
   .hscroll::-webkit-scrollbar{display:none}
+  @media (min-width:768px){.hscroll{flex-wrap:wrap}}
 

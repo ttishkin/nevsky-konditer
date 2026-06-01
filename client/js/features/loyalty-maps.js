@@ -114,9 +114,17 @@ function renderMap(){
   return h+'</div>';
 }
 function showMapFallback(){var b=document.getElementById('ymap');if(b){b.style.height='150px';b.innerHTML='<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;color:var(--label2)"><div style="font-size:32px">🗺️</div><div style="margin-top:8px;font-size:12px;line-height:1.4">Карта появится после добавления бесплатного API-ключа Яндекс.Карт в код приложения. Ввод адреса и выбор пункта работают и сейчас.</div></div>';}}
+function wireAddrInput(){
+  var inp=document.getElementById('ymsuggest');if(!inp)return;
+  inp.addEventListener('input',function(){
+    S._mapAddr=inp.value.trim();
+    var l=document.getElementById('mapsel');
+    if(l)l.textContent=S._mapAddr?'Адрес: '+S._mapAddr:'Начните вводить адрес или перетащите метку на карте';
+  });
+}
 function wireMap(){
   var box=document.getElementById('ymap');if(!box)return;
-  if(typeof ymaps==='undefined'||!ymaps.ready){showMapFallback();return;}
+  if(typeof ymaps==='undefined'||!ymaps.ready){showMapFallback();wireAddrInput();return;}
   ymaps.ready(function(){
     try{
       if(window._ym){try{window._ym.destroy();}catch(e){}window._ym=null;}

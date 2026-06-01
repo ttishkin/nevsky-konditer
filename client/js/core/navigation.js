@@ -33,7 +33,5 @@ document.addEventListener("input",function(e){
   if(e.target.id==="q"){S.query=e.target.value;S._focusQ=true;render();}
 });
 $("sheetbg").addEventListener("click",function(e){if(e.target===$("sheetbg"))closeSheet();});
-function clock(){var d=new Date();$("clock").textContent=d.getHours()+":"+String(d.getMinutes()).padStart(2,"0");}
-clock();setInterval(clock,30000);
 if(!S.profile){$("onb").style.display="flex";S.onbStep=0;renderOnb();}else{$("onb").style.display="none";}
 
