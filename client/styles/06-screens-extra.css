@@ -40,6 +40,7 @@
   .bndls{display:flex;gap:12px;overflow-x:auto;padding:6px 16px 14px;scrollbar-width:none}
   .bndls::-webkit-scrollbar{display:none}
   .bndl{flex:none;width:228px;border-radius:16px;overflow:hidden;cursor:pointer;border:1px solid var(--sep);background:var(--card)}
+  @media (min-width:768px){.bndls{flex-wrap:wrap;padding-left:4px;padding-right:4px}.bndl{flex:1;min-width:200px}}
   .bndl .bh{height:80px;display:flex;align-items:center;justify-content:center;font-size:38px}
   .bndl .bb{padding:10px 12px}
   .bndl .bn{font-size:15px;font-weight:700}

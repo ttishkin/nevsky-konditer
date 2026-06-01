@@ -34,5 +34,3 @@
 
   .hscroll{display:flex;gap:14px;overflow-x:auto;padding:6px 16px 14px;scrollbar-width:none}
   .hscroll::-webkit-scrollbar{display:none}
-  @media (min-width:768px){.hscroll{flex-wrap:wrap}}
-
